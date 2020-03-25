@@ -1,18 +1,15 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import BoardContainer from './boards/BoardContainer';
+import Header from './Header';
 
-const Wrapper = styled.div`
-  display: flex;
-  padding: 60px 35px;
-  flex-wrap: wrap;
-`
 class App extends React.Component {
     render() {
         return (
-            <Wrapper>
-              <BoardContainer/>
-            </Wrapper>
+            <div className="App">
+                <Header/>
+                <BoardContainer/>
+            </div>
+            
         );
     }
 }

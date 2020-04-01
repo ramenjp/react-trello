@@ -1,23 +1,32 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import CreateBoardContainer from './CreatingBoard/CreateBoardContainer';
+//import createNewBoard from './../../Actions/createNewBoard';
 
-const Wrapper = styled.div`
-  display: flex;
-  padding: 60px 35px;
-  flex-wrap: wrap;
-`
-class BoardContainer extends React.Component {
+//?をつけると入れても入れなくてもいい（null許可）
+type Props = {
+    name?:string;
+}
+
+type State = {
+    isOpen: boolean;
+};
+
+class BoardContainer extends React.Component<Props, State> {
+    //stateはjson
+    constructor(props:Props) {
+        super(props);
+        this.state = {
+            isOpen: false
+        };
+    }
+//stateで管理じゃなくてstoreで管理するためにactionを使わないといけない
     render() {
         return (
-            // 新しくBoardを作る用
-            <Wrapper>
-                {/* 新しいBoardを作るコンポーネント */}
-                <CreateBoardContainer />
-                {/* 作られたコンポーネントを並べる */}
-
-            </Wrapper>
-            );
+            <CreateBoardContainer />
+            //新しいBoardを作るコンポーネント
+                
+            /* 作られたコンポーネントを並べる （まだ作ってない）*/
+        );
     }
 }
 

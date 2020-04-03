@@ -1,5 +1,5 @@
 export default interface INewBoard {
-    isOpen: boolean;
+    isOpen?: boolean;
     title: string | undefined;
-    id?:number;
+    id?:string;
 }

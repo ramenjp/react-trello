@@ -7,10 +7,6 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import BoardTitleInput from './BoardTitleInput';
 import { connect } from 'react-redux';
 
-const Footer = styled.div`
-    display:flex
-`
-
 const ButtonWrapper = styled.div`
     margin: 20px 0 5px 0;
     display: flex;
@@ -19,7 +15,7 @@ const ButtonWrapper = styled.div`
 `
 
 const CancelButton = styled.button`
-    width: auto;
+    width: 114;
     height: 43px;
     margin: 15px -5px 5px;
     text-transform: uppercase;
@@ -60,11 +56,11 @@ interface Props {
 }
 
 //<>内は引き数（Props）の型
-let BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props:any) => {
-    console.log('BoardTitleForm,props',props);
-    const {handleSubmit,cancelAction} = props;
+let BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: any) => {
+    console.log('BoardTitleForm,props', props);
+    const { handleSubmit, cancelAction } = props;
     return (
-        <Footer>
+        <div>
             <form onSubmit={handleSubmit}>
                 <Field
                     name="boardTitle"
@@ -73,16 +69,18 @@ let BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props:any
                 />
             </form>
             <ButtonWrapper>
-                <CancelButton onClick={cancelAction}>Cancel</CancelButton>
-                <SubmitButton onClick={handleSubmit} type="button">Create</SubmitButton>
+                <CancelButton onClick={cancelAction}>キャンセル</CancelButton>
+                <SubmitButton onClick={handleSubmit} type="button">ボードを作成</SubmitButton>
             </ButtonWrapper>
-        </Footer>
+        </div>
     );
 }
 
 function validate(values: any) {
     let errors: any = {};
-    console.log(values);
+    if (!values.boardTitle || values.boardTitle === "") {
+        errors.boardTitle = "ボードタイトルを入力してください";
+    }
     return errors;
 }
 

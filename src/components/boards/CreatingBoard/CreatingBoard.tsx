@@ -7,16 +7,16 @@ import { createNewBoard } from './../../../Actions/CreateNewBoard';
 import { Dispatch } from 'redux';
 
 export const Wrapper = styled.div`
-    width: 345px;
+    width: 245px;
     height: auto;
     margin: 20px;
-    background-color: #9fe7a4;
+    background-color:rgb(75,191,107);
     padding: 30px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 5.5px;
+    border-radius: 6px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     cursor: pointer;
     transition: 200ms ease-in-out;
@@ -43,7 +43,7 @@ class CreatingBoard extends React.Component<ICreateNewBoardHundler>{
     render() {
         return (
             <Wrapper onClick={() => this.props.createNewBoard()}>
-                <Text>Create a new board...</Text>
+                <Text>新しいボードを作成</Text>
             </Wrapper>
         );
     }

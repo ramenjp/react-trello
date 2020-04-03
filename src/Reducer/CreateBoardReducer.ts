@@ -3,18 +3,19 @@ import { ICreateNewBoardAction } from '../Actions/CreateNewBoard';
 import { ICancelCreateBoardAction } from '../Actions/cancelCreateBoard';
 import { ISubmitNewBoardAction } from '../Actions/submitNewBoard';
 import INewBoard from './../Interface/INewBoard';
+import uniqueId from 'lodash/uniqueId';
 
-const initialState:INewBoard = {
+const initialState: INewBoard = {
     title: undefined,
     isOpen: false
 }
 
-type Actions = ICreateNewBoardAction 
-             | ICancelCreateBoardAction
-             | ISubmitNewBoardAction;
+type Actions = ICreateNewBoardAction
+    | ICancelCreateBoardAction
+    | ISubmitNewBoardAction;
 
-export default (state = initialState, action: Actions):INewBoard => {
-    console.log("reducer",action);
+export default (state = initialState, action: Actions): INewBoard => {
+    console.log("reducer", action);
     switch (action.type) {
         case CREATE_NEW_BOARD:
             return {
@@ -22,7 +23,7 @@ export default (state = initialState, action: Actions):INewBoard => {
                 title: undefined,
                 isOpen: true,
             };
-        
+
         case CANCEL_CREATE_BOARD:
             return {
                 ...state,
@@ -33,8 +34,9 @@ export default (state = initialState, action: Actions):INewBoard => {
         case SUBMIT_NEW_BOARD:
             return {
                 ...state,
-                title:action.payload.title, /*actionに記入済みのtestが返ってくるはずでは？ payloadの構造が違った*/
-                isOpen:action.payload.isOpen
+                title: action.payload.title,
+                isOpen: action.payload.isOpen,
+                id:uniqueId('')
             };
 
         default:

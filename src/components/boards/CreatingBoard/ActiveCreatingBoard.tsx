@@ -3,22 +3,24 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { cancelCreateBoard } from '../../../Actions/cancelCreateBoard';
 import { submitNewBoard } from '../../../Actions/submitNewBoard';
-import { Dispatch } from 'redux';
+//import { Dispatch } from 'redux';
 import { connect } from 'react-redux'
 import BoardTitleForm from './BoardTitleForm';
-
+import { ThunkDispatch } from 'redux-thunk';
+//import { ISubmitNewBoardAction } from '../../../Actions/submitNewBoard';
+import { RootActions, IAllState } from '../../../Interface/IAllState';
 
 export const Wrapper = styled.div`
-    width: 345px;
+    width: 245px;
     height: auto;
     margin: 20px;
-    background-color: #9fe7a4;
+    background-color: rgb(75,191,107);
     padding: 30px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 5.5px;
+    border-radius: 6px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     cursor: pointer;
     transition: 200ms ease-in-out;
@@ -32,9 +34,16 @@ export const Wrapper = styled.div`
     }
 `
 
-const Title = styled.h5`
+const Title = styled.h4`
     color: white;
     text-shadow: 0px 0px 3px #000;
+    border-bottom:solid;
+`
+
+const BodyWrapper = styled.h4`
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
 `
 
 //mapDispatchToPropsで受け取ったPropsの
@@ -62,18 +71,20 @@ class ActiveCreatingBoard extends React.Component<DispatchByProps> {
             //onSubmitはHTMLでいうinput type="" method=""みたいなやつ
             <div>
                 <Wrapper>
-                    <Title>Please Input BoardTitle</Title>
-                    <BoardTitleForm
-                        cancelAction={this.props.cancelCreateBoard}
-                        onSubmit={this.submit}
-                    />
+                    <Title>ボードタイトルを追加</Title>
+                    <BodyWrapper>
+                        <BoardTitleForm
+                            cancelAction={this.props.cancelCreateBoard}
+                            onSubmit={this.submit}
+                        />
+                    </BodyWrapper>
                 </Wrapper>
             </div>
         );
     }
 }
 
-const mapDispathToProps = (dispatch: Dispatch) => {
+const mapDispathToProps = (dispatch:ThunkDispatch<IAllState,any,RootActions>) => {
     return {
         submitNewBoard: (title:string) => { dispatch(submitNewBoard(title)) },
         cancelCreateBoard: () => { dispatch(cancelCreateBoard() ) }

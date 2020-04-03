@@ -4,25 +4,20 @@ import { connect } from 'react-redux';
 // import ActiveCreatingBoard from  './ActiveCreatingBoard';
 import CreatingBoard from './CreatingBoard';
 import ActiveCreatingBoard from './ActiveCreatingBoard';
-// import INewBoard from './../../../Interface/INewBoard';
 import { IAllState } from './../../../Interface/IAllState';
 import INewBoard from './../../../Interface/INewBoard';
 
-interface ICreateBoard {
-    isOpen: boolean;
-}
 
 //Propsにわざわざ継承させてるのはPropsにさらに型を追加したい場合のため
-interface Props extends ICreateBoard{ }
+interface Props extends INewBoard{}
 
-interface State { }
+interface State{}
 
 class CreateBoardContainer extends React.Component<Props, State> {
     render() {
-        console.log('open', this.props.isOpen)
         return (
             <div>
-                {this.props.isOpen ? <ActiveCreatingBoard/> : <CreatingBoard />}
+                {this.props.isOpen ? <ActiveCreatingBoard /> : <CreatingBoard />}
             </div>
             // isOpenの初期値false。trueならActiveCreatingBoardを表示、falseならCreatingBoard
         );
@@ -33,6 +28,8 @@ class CreateBoardContainer extends React.Component<Props, State> {
 /* ぱっと見でどんなものが返ってきてるかわかりやすい */
 /* functionには必ず型をつける！ */
 
+
+//titleいらないのでINewBoardじゃなくて普通にPropsでいい？
 const mapStateToProps = (state: IAllState): INewBoard => {
     return {
         isOpen: state.createBoard.isOpen,

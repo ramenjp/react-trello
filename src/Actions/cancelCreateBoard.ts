@@ -3,7 +3,7 @@ import { Action, ActionCreator } from 'redux';
 import INewBoard from '../Interface/INewBoard';
 import { RootActions,IAllState } from '../Interface/IAllState';
 import { setNewBoard } from './submitNewBoard';
-import { Dispatch } from 'react';
+import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
 export interface ICancelCreateBoardAction extends Action {

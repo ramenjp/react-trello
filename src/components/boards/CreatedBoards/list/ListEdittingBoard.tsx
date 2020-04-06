@@ -1,11 +1,8 @@
-import React from 'react';
-//import { Field } from 'redux-form';
+import * as React from 'react';
 import styled from 'styled-components';
-import { submitNewList } from '../../../../Actions/submitNewList'
-import ListTitleForm from './ListTitleForm';
-import { IAllState, RootActions } from '../../../../Interface/IAllState'
 import { connect } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
+import BoardTitleInput from '../../CreatingBoard/BoardTitleInput';
+import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 const ListEdittingWrapper = styled.div`
     width: 245px;
@@ -31,39 +28,36 @@ const ListEdittingWrapper = styled.div`
     }
 `
 
-interface PropsByDispatch{
-    submitNewList(title:string):void
-}
+interface Props{}
 
-class ListEdittingBoard extends React.Component<PropsByDispatch>{
-    constructor(props:PropsByDispatch){
-        super(props);
-        this.submit = this.submit.bind(this);
-    }
-
-    submit = (values: any) => {
-        this.props.submitNewList(values.listTitle)
-        values.listTitle = '';
-    }
-    
+class ListEdittingBoard extends React.Component<InjectedFormProps<{}, Props>>{
     render() {
+        const { handleSubmit } = this.props;
         console.log('this is ListEdittingBoard');
         return (
             <ListEdittingWrapper>
-                <div>
-                <ListTitleForm
-                    onSubmit={this.submit}
-                />
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <Field
+                        name="listTitle"
+                        component={BoardTitleInput}
+                        type="text"
+                        placeholder="add a list"
+                    />
+                </form>
             </ListEdittingWrapper>
         );
     }
 }
 
-const mapDispatchToProps = (dispatch:ThunkDispatch<IAllState, any, RootActions>) => {
-    return {
-        submitNewList: (title:string) => {dispatch(submitNewList(title)) }
+function validate(values: any) {
+    let errors: any = {};
+    if (!values.listTitle || values.listTitle === "") {
+        errors.listTitle = "タイトルを入力してください";
     }
+    return errors;
 }
 
-export default connect(null,mapDispatchToProps)(ListEdittingBoard);
+export default reduxForm<{}, Props>({
+    validate,
+    form: 'listTitle'
+})(connect(null)(ListEdittingBoard));

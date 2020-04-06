@@ -15,7 +15,6 @@ const CancelButton = styled.button`
     width: 114;
     height: 43px;
     margin: 15px -5px 5px;
-    text-transform: uppercase;
     cursor: pointer;
     transition: all 200ms ease-in-out;
     border: none;
@@ -25,7 +24,6 @@ const CancelButton = styled.button`
     text-shadow: 0px 0px 3px #000;
     &:hover {
         transition: all 200ms ease-in-out;
-        background-color: none;
         color: #00ffc5;
     }
 `
@@ -34,11 +32,11 @@ const SubmitButton = styled.button`
     width: 114px;
     height: 43px;
     margin: 15px 18px 5px;
-    text-transform: uppercase;
     cursor: pointer;
     transition: all 250 ease-in-out;
     border: none;
     box-shadow: 0 3px 3px rgba(0,0,0,0.16), 0 3px 3px rgba(0,0,0,0.23);
+    border-radius: 5px;
 
     &:hover {
         transition: all 250ms ease-in-out;
@@ -46,6 +44,11 @@ const SubmitButton = styled.button`
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         background-color: #dbdbdb;
     }
+`
+
+const FormWrapper = styled.div`
+    display:flex;
+    justify-content: center;
 `
 
 interface Props {
@@ -58,6 +61,7 @@ const BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: 
     const { handleSubmit, cancelAction } = props;
     return (
         <div>
+            <FormWrapper>
             <form onSubmit={handleSubmit}>
                 <Field
                     name="boardTitle"
@@ -65,6 +69,7 @@ const BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: 
                     type="text"
                 />
             </form>
+            </FormWrapper>
             <ButtonWrapper>
                 <CancelButton onClick={cancelAction}>キャンセル</CancelButton>
                 <SubmitButton onClick={handleSubmit} type="button">ボードを作成</SubmitButton>

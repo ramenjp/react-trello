@@ -45,7 +45,7 @@ class BoardContainer extends React.Component<Props, State> {
         return (
             <IndexWrapper>
                 {this.renderAllBoards()}
-                <CreateBoardContainer />
+                <CreateBoardContainer/>
             </IndexWrapper>
         );
     }

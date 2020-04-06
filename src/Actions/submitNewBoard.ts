@@ -2,7 +2,7 @@ import { SUBMIT_NEW_BOARD } from './actions';
 import { STORE_NEW_BOARD_TO_COLLECTION } from './actions';
 import { Action, ActionCreator } from 'redux';
 import INewBoard from '../Interface/INewBoard';
-import { Dispatch } from 'react';
+import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import Store from './../Store';
 import { RootActions, IAllState } from '../Interface/IAllState';

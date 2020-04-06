@@ -41,7 +41,7 @@ const Title = styled.h4`
 `
 
 const BodyWrapper = styled.h4`
-    display: flex;
+   
     flex-direction: column;
     margin: 10px;
 `

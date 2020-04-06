@@ -33,14 +33,21 @@ class ListTitleForm extends React.Component<InjectedFormProps<{}, Props>>{
 }
 
 function validate(values: any) {
-        const errors: any = {};
-        console.log(values.listTitle);
-        return errors;
+    let errors: any = {};
+    if (!values.listTitle || values.listTitle === "") {
+        errors.boardTitle = "タイトルを入力してください";
     }
+    return errors;
+}
 
-const form = reduxForm<{}, Props>({
-        validate,
-        form: 'listTitle'
-    })(ListTitleForm)
+// const form = reduxForm<{}, Props>({
+//         validate,
+//         form: 'listTitle'
+//     })(ListTitleForm)
 
-export default connect(null)(form);
+// export default connect(null)(form);
+
+export default reduxForm<{}, Props>({
+    validate,
+    form: 'listTitle'
+})(connect(null)(ListTitleForm));

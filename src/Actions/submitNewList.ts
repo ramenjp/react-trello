@@ -3,7 +3,7 @@ import { Action, ActionCreator } from 'redux';
 import { RootActions, IAllState } from '../Interface/IAllState';
 import INewBoard from '../Interface/INewBoard';
 import { ThunkAction } from 'redux-thunk';
-import { Dispatch } from 'react';
+import { Dispatch } from 'redux';
 
 export interface ISubmitNewListAction extends Action {
     type:string;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import BoardContainer from './boards/BoardContainer';
 import Header from './Header';
 import { Route, Switch } from 'react-router-dom';
-import ShowActiveBoard from './boards/CreatedBoards/ShowActiveBoard'
+import ShowActiveBoard from './boards/CreatedBoards/ShowActiveBoard';
 
 class App extends React.Component {
     render() {

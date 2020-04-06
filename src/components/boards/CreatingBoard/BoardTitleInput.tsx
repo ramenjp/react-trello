@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-let BoardTitleInput:React.FC = (field:any) => {
+const BoardTitleInput:React.SFC = (field:any) => {
     return(
     <label>
         <input

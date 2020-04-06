@@ -1,5 +1,4 @@
 import * as React from 'react';
-// interface formProps extends ReduxForm.ReduxFormProps{ }
 
 let BoardTitleInput:React.FC = (field:any) => {
     return(
@@ -16,7 +15,7 @@ let BoardTitleInput:React.FC = (field:any) => {
             <p className="error">{field.meta.error}</p>
         }
     </label>
-)
+);
     }
 
 export default BoardTitleInput;

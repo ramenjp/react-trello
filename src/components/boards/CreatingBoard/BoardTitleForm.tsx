@@ -1,9 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-//import { ICancelCreateBoardAction } from '../../../Actions/cancelCreateBoard';
-//import INewBoard from '../../../Interface/INewBoard';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
-//import * as ReduxForm from 'redux-form';
 import BoardTitleInput from './BoardTitleInput';
 import { connect } from 'react-redux';
 
@@ -56,7 +53,7 @@ interface Props {
 }
 
 //<>内は引き数（Props）の型
-let BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: any) => {
+const BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: any) => {
     console.log('BoardTitleForm,props', props);
     const { handleSubmit, cancelAction } = props;
     return (

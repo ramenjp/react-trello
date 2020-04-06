@@ -49,13 +49,13 @@ const BodyWrapper = styled.h4`
 //mapDispatchToPropsで受け取ったPropsの
 //actionからは何も受け取ってないから
 
-interface DispatchByProps {
+interface PropsByDispatch {
     cancelCreateBoard(): void,
     submitNewBoard(title:string): void
 }
 
-class ActiveCreatingBoard extends React.Component<DispatchByProps> {
-    constructor(props:DispatchByProps){
+class ActiveCreatingBoard extends React.Component<PropsByDispatch> {
+    constructor(props:PropsByDispatch){
         super(props);
         this.submit=this.submit.bind(this);
     }

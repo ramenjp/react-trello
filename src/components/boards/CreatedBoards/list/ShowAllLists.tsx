@@ -41,7 +41,7 @@ class ShowAllLists extends React.Component<AllLists>{
         console.log('props cards',this.props.cards);
         return (
             <ListWrapper>
-                <Title>{this.props.title['title']}</Title>
+                <Title>{this.props.title}</Title>
             </ListWrapper>
         );
     }

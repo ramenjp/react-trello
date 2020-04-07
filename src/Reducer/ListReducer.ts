@@ -15,6 +15,8 @@ type Actions = ISubmitNewListAction;
 // }
 
 export default (state =initialState,action:Actions):any =>{
+    console.log("Actiontype",action.type);
+    console.log("payload",action.payload);
     switch (action.type){
         case SUBMIT_NEW_LIST:
             return{

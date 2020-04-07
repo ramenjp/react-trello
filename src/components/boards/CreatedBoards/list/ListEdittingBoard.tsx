@@ -27,6 +27,10 @@ const ListEdittingWrapper = styled.div`
         transform: scale(1.10);
     }
 `
+const FormWrapper = styled.div`
+    display:flex;
+    justify-content: center;
+`
 
 interface Props{}
 
@@ -36,14 +40,16 @@ class ListEdittingBoard extends React.Component<InjectedFormProps<{}, Props>>{
         console.log('this is ListEdittingBoard');
         return (
             <ListEdittingWrapper>
+                <FormWrapper>
                 <form onSubmit={handleSubmit}>
                     <Field
                         name="listTitle"
                         component={BoardTitleInput}
                         type="text"
-                        placeholder="add a list"
+                        placeholder="リスト名を入力"
                     />
                 </form>
+                </FormWrapper>
             </ListEdittingWrapper>
         );
     }

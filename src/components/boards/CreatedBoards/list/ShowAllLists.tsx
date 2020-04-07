@@ -1,9 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-//import BoardContainer from './BoardContainer';
-import { Link } from 'react-router-dom';
 
-const BoardWrapper = styled.div`
+const ListWrapper = styled.div`
     width: 245px;
     height: auto;
     margin: 20px;
@@ -26,25 +24,28 @@ const BoardWrapper = styled.div`
         transform: scale(1.10);
     }
 `
-
 const Title = styled.h2`
     color: black;
     word-break: break-all;
     padding: 10px;
 `
-interface AllBoards {
-    title: string;
-    id: string;
+
+interface AllLists {
+    title:string;
+    id:string;
+    cards:string[]
 }
 
-const ShowAllBoards: React.FC<AllBoards> = (props) => {
-    return (
-        <Link to={`/b/${props.id}`}>
-            <BoardWrapper>
-                <Title>{props.title}</Title>
-            </BoardWrapper>
-        </Link>
-    );
+class ShowAllLists extends React.Component<AllLists>{
+    render() {
+        console.log('props cards',this.props.cards);
+        return (
+            <ListWrapper>
+                <Title>{this.props.title['title']}</Title>
+            </ListWrapper>
+        );
+    }
+
 }
 
-export default ShowAllBoards;
+export default ShowAllLists;

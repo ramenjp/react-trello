@@ -36,7 +36,6 @@ export const storeNewBoard:ActionCreator<RootActions> = (
 }as RootActions);
 
 
-
 export const submitNewBoard = (title: string): ThunkAction<void, IAllState, null, RootActions> => (
     dispatch: Dispatch<Action>
 ) => {
@@ -49,6 +48,7 @@ export const submitNewBoard = (title: string): ThunkAction<void, IAllState, null
         title: Store.getState().createBoard.title,
         id: Store.getState().createBoard.id
     }
+
     dispatch(storeNewBoard(newBoard))
 }
 

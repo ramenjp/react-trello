@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-//import BoardContainer from './BoardContainer';
 import { Link } from 'react-router-dom';
+import { IBoard } from '../../Interface/IStatus';
 
 const BoardWrapper = styled.div`
     width: 245px;
@@ -32,12 +32,9 @@ const Title = styled.h2`
     word-break: break-all;
     padding: 10px;
 `
-interface AllBoards {
-    title: string;
-    id: string;
-}
 
-const ShowAllBoards: React.FC<AllBoards> = (props) => {
+
+const ShowAllBoards: React.FC<IBoard> = (props) => {
     return (
         <Link to={`/b/${props.id}`}>
             <BoardWrapper>

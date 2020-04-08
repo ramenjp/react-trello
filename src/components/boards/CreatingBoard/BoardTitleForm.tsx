@@ -62,13 +62,13 @@ const BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: 
     return (
         <div>
             <FormWrapper>
-            <form onSubmit={handleSubmit}>
-                <Field
-                    name="boardTitle"
-                    component={BoardTitleInput}
-                    type="text"
-                />
-            </form>
+                <form onSubmit={handleSubmit}>
+                    <Field
+                        name="boardTitle"
+                        component={BoardTitleInput}
+                        type="text"
+                    />
+                </form>
             </FormWrapper>
             <ButtonWrapper>
                 <CancelButton onClick={cancelAction}>キャンセル</CancelButton>

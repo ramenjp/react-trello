@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-// import styled from 'styled-components';
-// import ActiveCreatingBoard from  './ActiveCreatingBoard';
 import CreatingBoard from './CreatingBoard';
 import ActiveCreatingBoard from './ActiveCreatingBoard';
 import { IAllState } from './../../../Interface/IAllState';
@@ -11,9 +9,7 @@ import INewBoard from './../../../Interface/INewBoard';
 //Propsにわざわざ継承させてるのはPropsにさらに型を追加したい場合のため
 interface Props extends INewBoard{}
 
-interface State{}
-
-class CreateBoardContainer extends React.Component<Props, State> {
+class CreateBoardContainer extends React.Component<Props> {
     render() {
         return (
             <div>

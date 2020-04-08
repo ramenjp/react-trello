@@ -1,9 +1,8 @@
 import { CANCEL_CREATE_BOARD } from './actions';
-import { Action, ActionCreator } from 'redux';
+import { Action, ActionCreator,Dispatch } from 'redux';
 import INewBoard from '../Interface/INewBoard';
-import { RootActions,IAllState } from '../Interface/IAllState';
+import { RootActions, IAllState } from '../Interface/IAllState';
 import { setNewBoard } from './submitNewBoard';
-import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
 export interface ICancelCreateBoardAction extends Action {
@@ -27,18 +26,3 @@ export const cancelCreateBoard = (): ThunkAction<void, IAllState, null, RootActi
         isOpen: false
     }));
 }
-
-
-
-
-
-
-// export const cancelCreateBoard = (): ICancelCreateBoardAction => {
-//     return {
-//         type: CANCEL_CREATE_BOARD,
-//         payload: {
-//             title: undefined,
-//             isOpen: false
-//         }
-//     }
-// }

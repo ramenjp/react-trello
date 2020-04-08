@@ -1,16 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-//import { reduxForm, Field } from 'redux-form';
 import ListEdittingBoard from './list/ListEdittingBoard';
 import { connect } from 'react-redux';
 import { submitNewList } from '../../../Actions/submitNewList';
 import { ThunkDispatch } from 'redux-thunk';
 import { IAllState, RootActions } from '../../../Interface/IAllState';
-import IList from '../../../Interface/IList';
 import ShowAllLists from './list/ShowAllLists';
 import { selectActiveBoard } from '../../../Actions/selectActiveBoard';
-//import IBoard from '../../../Interface/IBoard';
-import INewBoard from '../../../Interface/INewBoard';
+import { IBoard } from '../../../Interface/IStatus';
+import { RouteComponentProps } from 'react-router-dom'
+import { Lists } from '../../../Reducer/ListReducer';
 
 const SubHeader = styled.h4`
     display:flex;
@@ -24,48 +23,52 @@ const IndexWrapper = styled.div`
 
 interface PropsByDispatch {
     submitNewList(title: string): void
+    selectActiveBoard(id: string): void
 }
 
 interface ReturnedList {
-    lists:IList[];
-    activeBoard:INewBoard;
+    lists: Lists;
+    activeBoard: IBoard;
 }
 
-interface Props extends PropsByDispatch,
-                        ReturnedList {}
+type Props = {} & PropsByDispatch
+    & ReturnedList
+    & RouteComponentProps<{ id: string }>
+
 
 class ShowActiveBoard extends React.Component<Props>{
+    componentDidMount() {
+        const {
+            match,
+            selectActiveBoard,
+        } = this.props;
 
-    componentDidMount(){
-    const {
-        match,
-        selectActiveBoard,
-    }:any = this.props;
-
-    selectActiveBoard(match.params.id.toString)
+        selectActiveBoard(match.params.id)
     }
 
-    getTitle(){
-        console.log("getTitle",this.props.activeBoard)
-        this.props.activeBoard.title;
+    getTitle() {
+        console.log("getTitle", this.props.activeBoard)
+        return this.props.activeBoard.title;
     }
 
     renderAllLists = () => {
         const { lists } = this.props;
-        console.log('renderALL ',lists)
-        return lists.map(list =>{
-            return(
-            <ShowAllLists
-                title={list.title}
-                id={list.id}
-                key={list.id}
-                cards={list.cards}
-            />
+        //listsのkeyだけの配列を作る
+        const listId = Object.keys(lists)
+        return listId.map(list => {
+            const { listid, title, cards } = lists[list]
+            return (
+                <ShowAllLists
+                    title={title}
+                    listid={listid}
+                    key={listid}
+                    cards={cards}
+                />
             );
-        });
+        })
     }
 
-    submit = (values: any) => {
+    submitList = (values: any) => {
         this.props.submitNewList(values.listTitle);
         values.listTitle = '';
     }
@@ -74,11 +77,13 @@ class ShowActiveBoard extends React.Component<Props>{
         console.log('this is ShowActiveBoard');
         return (
             <div>
-                {this.getTitle()}
-                <SubHeader>test</SubHeader>
+                <SubHeader>
+                    {this.getTitle()}
+                </SubHeader>
+
                 <IndexWrapper>
                     {this.renderAllLists()}
-                    <ListEdittingBoard onSubmit={this.submit} />
+                    <ListEdittingBoard onSubmit={this.submitList} />
                 </IndexWrapper>
             </div>
         );
@@ -87,15 +92,15 @@ class ShowActiveBoard extends React.Component<Props>{
 
 const mapStateToProps = (state: IAllState): ReturnedList => {
     return {
-        lists: state.listsCollection,
-        activeBoard:state.activeBoard
+        lists: state.createList,
+        activeBoard: state.activeBoard
     }
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
     return {
         submitNewList: (title: string) => { dispatch(submitNewList(title)) },
-        selectActiveBoard:(id:string) => {dispatch(selectActiveBoard(id))}
+        selectActiveBoard: (id: string) => { dispatch(selectActiveBoard(id)) }
     }
 }
 

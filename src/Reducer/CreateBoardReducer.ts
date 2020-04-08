@@ -20,14 +20,14 @@ export default (state = initialState, action: Actions): INewBoard => {
         case CREATE_NEW_BOARD:
             return {
                 ...state,
-                title: undefined,
+                title: '',
                 isOpen: true,
             };
 
         case CANCEL_CREATE_BOARD:
             return {
                 ...state,
-                title: undefined,
+                title: '',
                 isOpen: false,
             };
 
@@ -36,7 +36,7 @@ export default (state = initialState, action: Actions): INewBoard => {
                 ...state,
                 title: action.payload.title,
                 isOpen: action.payload.isOpen,
-                id:uniqueId('')
+                id: uniqueId('')
             };
 
         default:

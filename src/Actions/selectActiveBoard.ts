@@ -1,13 +1,11 @@
-import { Action, ActionCreator } from 'redux';
+import { Action, ActionCreator, Dispatch } from 'redux';
 import { RootActions, IAllState } from '../Interface/IAllState';
 import { ThunkAction } from 'redux-thunk';
-import IBoard from '../Interface/IBoard';
+import { IBoard } from '../Interface/IStatus';
 import { SELECT_ACTIVE_BOARD } from './actions';
-import { Dispatch } from 'redux';
-//import boardsCollection from '../Reducer/RootReducer';
 import Store from '../Store';
 
-export interface ISelectActiveBoard extends Action{
+export interface ISelectActiveBoard extends Action {
     payload: IBoard;
 }
 

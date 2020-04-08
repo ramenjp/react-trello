@@ -1,6 +1,6 @@
 import { STORE_NEW_BOARD_TO_COLLECTION } from '../Actions/actions';
 import { IStoreNewBoardAction } from '../Actions/submitNewBoard';
-import IBoard from '../Interface/IBoard';
+import { IBoard } from '../Interface/IStatus';
 
 const initialState: IBoard[] = []
 

@@ -1,11 +1,18 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import CardContainer from '../card/CardContainer';
+import { ThunkDispatch } from 'redux-thunk';
+import { IAllState, RootActions } from '../../../../Interface/IAllState';
+import { submitNewCard } from '../../../../Actions/submitNewCard';
+import { IList } from '../../../../Interface/IStatus';
+import uniqueId from 'lodash/uniqueId';
 
 const ListWrapper = styled.div`
     width: 245px;
     height: auto;
     margin: 20px;
-    background-color: white;
+    background-color: #ebecf0;;
     color: #333;
     display: flex;
     flex-direction: column;
@@ -30,22 +37,42 @@ const Title = styled.h2`
     padding: 10px;
 `
 
-interface AllLists {
-    title:string;
-    id:string;
-    cards:string[]
+interface PropsByDispatch {
+    submitNewCard(name: string, listid: string, cardid: string): void
 }
 
-class ShowAllLists extends React.Component<AllLists>{
+interface Props extends IList, PropsByDispatch { }
+
+
+class ShowAllLists extends React.Component<Props>{
+    constructor(props: any) {
+        super(props);
+        this.submitCard = this.submitCard.bind(this);
+    }
+
+    renderAllCards() { }
+
+    submitCard = (values: any) => {
+        this.props.submitNewCard(values.name, this.props.listid, uniqueId('cardid_'));
+    }
+
     render() {
-        console.log('props cards',this.props.cards);
+        console.log('props cards', this.props);
         return (
             <ListWrapper>
                 <Title>{this.props.title}</Title>
+                <CardContainer onSubmit={this.submitCard} />
+                {this.renderAllCards}
             </ListWrapper>
         );
     }
-
 }
 
-export default ShowAllLists;
+const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
+    return {
+        submitNewCard: (name: string, listid: string, cardid: string) => { dispatch(submitNewCard(name, listid, cardid)) }
+    }
+}
+
+//ActionからsubmitCard()取得
+export default connect(null, mapDispatchToProps)(ShowAllLists);

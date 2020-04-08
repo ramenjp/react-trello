@@ -1,13 +1,10 @@
 import * as React from 'react';
-// import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { cancelCreateBoard } from '../../../Actions/cancelCreateBoard';
 import { submitNewBoard } from '../../../Actions/submitNewBoard';
-//import { Dispatch } from 'redux';
 import { connect } from 'react-redux'
 import BoardTitleForm from './BoardTitleForm';
 import { ThunkDispatch } from 'redux-thunk';
-//import { ISubmitNewBoardAction } from '../../../Actions/submitNewBoard';
 import { RootActions, IAllState } from '../../../Interface/IAllState';
 
 export const Wrapper = styled.div`
@@ -45,30 +42,25 @@ const BodyWrapper = styled.h4`
     flex-direction: column;
     margin: 10px;
 `
-
-//mapDispatchToPropsで受け取ったPropsの
-//actionからは何も受け取ってないから
-
 interface PropsByDispatch {
     cancelCreateBoard(): void,
-    submitNewBoard(title:string): void
+    submitNewBoard(title: string): void
 }
 
 class ActiveCreatingBoard extends React.Component<PropsByDispatch> {
-    constructor(props:PropsByDispatch){
+    constructor(props: PropsByDispatch) {
         super(props);
-        this.submit=this.submit.bind(this);
+        this.submit = this.submit.bind(this);
     }
-    
-    submit = (values:any) =>{
-        console.log('ActiveCreatingBoard:values.boardTitle',values)
+
+    submit = (values: any) => {
+        console.log('ActiveCreatingBoard:values.boardTitle', values)
         this.props.submitNewBoard(values.boardTitle);
         values.boardTitle = '';
     }
 
     render() {
         return (
-            //onSubmitはHTMLでいうinput type="" method=""みたいなやつ
             <div>
                 <Wrapper>
                     <Title>ボードタイトルを追加</Title>
@@ -84,12 +76,11 @@ class ActiveCreatingBoard extends React.Component<PropsByDispatch> {
     }
 }
 
-const mapDispathToProps = (dispatch:ThunkDispatch<IAllState,any,RootActions>) => {
+const mapDispathToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
     return {
-        submitNewBoard: (title:string) => { dispatch(submitNewBoard(title)) },
-        cancelCreateBoard: () => { dispatch(cancelCreateBoard() ) }
+        submitNewBoard: (title: string) => { dispatch(submitNewBoard(title)) },
+        cancelCreateBoard: () => { dispatch(cancelCreateBoard()) }
     }
 }
 
-//nullのとこはstoreから受け取る値,mapDispatchToPropsのとこはactionをpropsに登録的な意味
 export default connect(null, mapDispathToProps)(ActiveCreatingBoard);

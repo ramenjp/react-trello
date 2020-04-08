@@ -32,7 +32,7 @@ const FormWrapper = styled.div`
     justify-content: center;
 `
 
-interface Props{}
+interface Props { }
 
 class ListEdittingBoard extends React.Component<InjectedFormProps<{}, Props>>{
     render() {
@@ -41,14 +41,14 @@ class ListEdittingBoard extends React.Component<InjectedFormProps<{}, Props>>{
         return (
             <ListEdittingWrapper>
                 <FormWrapper>
-                <form onSubmit={handleSubmit}>
-                    <Field
-                        name="listTitle"
-                        component={BoardTitleInput}
-                        type="text"
-                        placeholder="リスト名を入力"
-                    />
-                </form>
+                    <form onSubmit={handleSubmit}>
+                        <Field
+                            name="listTitle"
+                            component={BoardTitleInput}
+                            type="text"
+                            placeholder="リスト名を入力"
+                        />
+                    </form>
                 </FormWrapper>
             </ListEdittingWrapper>
         );

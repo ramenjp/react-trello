@@ -1,7 +1,7 @@
 //import INewBoard from '../Interface/INewBoard';
 import { SELECT_ACTIVE_BOARD } from '../Actions/actions';
 import { ISelectActiveBoard } from '../Actions/selectActiveBoard';
-import IBoard from '../Interface/IBoard';
+import { IBoard } from '../Interface/IStatus';
 
 const initialState:IBoard = {
     title:'',

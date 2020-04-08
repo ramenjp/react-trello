@@ -10,9 +10,9 @@ export interface ICreateNewBoardAction extends Action {
 export const createNewBoard = (): ICreateNewBoardAction => {
     return {
         type: CREATE_NEW_BOARD,
-        payload:{
-            isOpen:true,
-            title:undefined
+        payload: {
+            isOpen: true,
+            title: undefined
         }
     }
 }

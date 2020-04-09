@@ -6,7 +6,6 @@ import { ThunkDispatch } from 'redux-thunk';
 import { IAllState, RootActions } from '../../../../Interface/IAllState';
 import { submitNewCard } from '../../../../Actions/submitNewCard';
 import uniqueId from 'lodash/uniqueId';
-import Store from '../../../../Store';
 
 interface PropsByDispatch {
     submitNewCard(name: string, listid: string, cardid: string): void
@@ -16,18 +15,14 @@ interface Props {
     listid:string;
 }
 
-// interface cardInput{
-//     cardInput:
-// }
-
 class CardContainer extends React.Component<Props & PropsByDispatch & InjectedFormProps<{}, Props>>{
     submitCard = (values: any) => {
         
         const{ listid } = this.props;
         const cardName = `cardName_${listid}`
-        console.log("values.cardTitle",cardName)
-        const inputValues = Store.getState().form.card.values.cardName;
-        this.props.submitNewCard(inputValues, this.props.listid, uniqueId('cardid_'));
+        console.log("values",values)
+        console.log("values.cardTitle",values[cardName])
+        this.props.submitNewCard(values[cardName], this.props.listid, uniqueId('cardid_'));
     }
     
     render() {
@@ -36,12 +31,15 @@ class CardContainer extends React.Component<Props & PropsByDispatch & InjectedFo
         return (
             <div>
                 <form onSubmit={handleSubmit(this.submitCard)}>
+                    <label>
                     <Field
                         name={`cardName_${listid}`}
                         component={BoardTitleInput}
                         type="text"
                     />
+                    </label>
                 </form>
+                
             </div>
         );
     }

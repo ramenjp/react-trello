@@ -7,6 +7,8 @@ import { IAllState, RootActions } from '../../../../Interface/IAllState';
 import { submitNewCard } from '../../../../Actions/submitNewCard';
 import { IList } from '../../../../Interface/IStatus';
 import uniqueId from 'lodash/uniqueId';
+//import Store from '../../../../Store';
+import Card from '../card/Card';
 
 const ListWrapper = styled.div`
     width: 245px;
@@ -36,6 +38,7 @@ const Title = styled.h2`
     word-break: break-all;
     padding: 10px;
 `
+// interface ReturnedCard{}
 
 interface PropsByDispatch {
     submitNewCard(name: string, listid: string, cardid: string): void
@@ -50,10 +53,19 @@ class ShowAllLists extends React.Component<Props>{
         this.submitCard = this.submitCard.bind(this);
     }
 
-    renderAllCards() { }
+    renderAllCards = () =>{
+        const{ cards } = this.props;
+        return cards.map(card => {
+            return (
+                <Card
+                    cardName={card.name}
+                />
+            )
+        })
+    }
 
     submitCard = (values: any) => {
-        this.props.submitNewCard(values.name, this.props.listid, uniqueId('cardid_'));
+        this.props.submitNewCard(values.cardTitle, this.props.listid, uniqueId('cardid_'));
     }
 
     render() {
@@ -68,6 +80,13 @@ class ShowAllLists extends React.Component<Props>{
     }
 }
 
+// const mapStateToProps = (state:IAllState):ReturnedCard => {
+//     return{
+//     cards:lists.cards
+//     }
+// }
+
+
 const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
     return {
         submitNewCard: (name: string, listid: string, cardid: string) => { dispatch(submitNewCard(name, listid, cardid)) }
@@ -75,4 +94,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>
 }
 
 //ActionからsubmitCard()取得
-export default connect(null, mapDispatchToProps)(ShowAllLists);
+export default connect(mapDispatchToProps)(ShowAllLists);

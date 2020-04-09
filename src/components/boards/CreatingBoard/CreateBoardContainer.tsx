@@ -20,12 +20,6 @@ class CreateBoardContainer extends React.Component<Props> {
     }
 }
 
-/* createBoardは引数、INewBoardは返り値の型、ICreateBoardはfucntionの返り値 */
-/* ぱっと見でどんなものが返ってきてるかわかりやすい */
-/* functionには必ず型をつける！ */
-
-
-//titleいらないのでINewBoardじゃなくて普通にPropsでいい？
 const mapStateToProps = (state: IAllState): INewBoard => {
     return {
         isOpen: state.createBoard.isOpen,
@@ -33,5 +27,4 @@ const mapStateToProps = (state: IAllState): INewBoard => {
     }
 }
 
-//mapStateToPropsはアプリケーション全部のstateが返ってくるので全体の型定義をしたものをstateの型にする（のが無難）
 export default connect(mapStateToProps)(CreateBoardContainer)

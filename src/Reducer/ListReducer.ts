@@ -11,7 +11,7 @@ export type Lists = {
 }
 
 export default (state = initialState, action: Actions): Lists => {
-    const listId = uniqueId("");
+    const listId = uniqueId("list_");
     switch (action.type) {
         case SUBMIT_NEW_LIST:
             return {
@@ -25,17 +25,16 @@ export default (state = initialState, action: Actions): Lists => {
 
         case SUBMIT_NEW_CARD: {
             //const{ name,listid,cardid } = action.payload;
-
-            const name = action.payload;
-            const listid = action.payload;
-            const cardid = action.payload;
+            console.log("SUBMIT_NEW_CARD", action.payload);
+            // const name = action.payload;
+            // const listid = action.payload;
+            // const cardid = action.payload;
 
             //リストを追加するリストを取得
-            const nowList = state[listid];
-            nowList.cards.push({ name: name, listid, cardid })
+            // const nowList = state[listid];
+            //state[listid].cards.push({ name: name, listid, cardid })
             return {
                 ...state,
-                [listid]: nowList
             }
         }
 

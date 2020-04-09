@@ -45,7 +45,6 @@ class ListEdittingBoard extends React.Component<InjectedFormProps<{}, Props>>{
                         <Field
                             name="listTitle"
                             component={BoardTitleInput}
-                            type="text"
                             placeholder="リスト名を入力"
                         />
                     </form>

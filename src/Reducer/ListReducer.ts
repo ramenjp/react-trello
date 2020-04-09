@@ -18,7 +18,7 @@ export default (state = initialState, action: Actions): Lists => {
                 ...state,
                 [listId]: {
                     title: action.payload,
-                    id: listId,
+                    listid: listId,
                     cards: []
                 }
             };

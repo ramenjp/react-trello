@@ -12,6 +12,9 @@ import { RouteComponentProps } from 'react-router-dom'
 import { Lists } from '../../../Reducer/ListReducer';
 
 const SubHeader = styled.h4`
+    width: 1000px;
+    height:auto
+    background-color: #ebecf0;;
     display:flex;
     color:black;
     font-weight: 900;
@@ -55,12 +58,10 @@ class ShowActiveBoard extends React.Component<Props>{
         const { lists } = this.props;
         //listsのkeyだけの配列を作る
         const listId = Object.keys(lists)
-        console.log(listId);
-        console.log(lists[listId[0]]); //ちゃんと中身とれてる
+        console.log("RENDER ALL LISTS",listId);
         
         return listId.map(list => {
             const { listid, title, cards } = lists[list] //listidがundefined
-            console.log("ShowAllLists props listid",listid);
             return (
                 <ShowAllLists
                     title={title}

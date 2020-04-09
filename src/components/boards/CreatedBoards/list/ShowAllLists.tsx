@@ -2,11 +2,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import CardContainer from '../card/CardContainer';
-import { ThunkDispatch } from 'redux-thunk';
-import { IAllState, RootActions } from '../../../../Interface/IAllState';
-import { submitNewCard } from '../../../../Actions/submitNewCard';
+// import { ThunkDispatch } from 'redux-thunk';
+// import { IAllState, RootActions } from '../../../../Interface/IAllState';
+// import { submitNewCard } from '../../../../Actions/submitNewCard';
 import { IList } from '../../../../Interface/IStatus';
-import uniqueId from 'lodash/uniqueId';
+//import uniqueId from 'lodash/uniqueId';
 //import Store from '../../../../Store';
 import Card from '../card/Card';
 
@@ -40,18 +40,14 @@ const Title = styled.h2`
 `
 // interface ReturnedCard{}
 
-interface PropsByDispatch {
-    submitNewCard(name: string, listid: string, cardid: string): void
-}
+// interface PropsByDispatch {
+//     submitNewCard(name: string, listid: string, cardid: string): void
+// }
 
-interface Props extends IList, PropsByDispatch { }
+interface Props extends IList{}
 
 
 class ShowAllLists extends React.Component<Props>{
-    constructor(props: any) {
-        super(props);
-        this.submitCard = this.submitCard.bind(this);
-    }
 
     renderAllCards = () =>{
         const{ cards } = this.props;
@@ -64,16 +60,14 @@ class ShowAllLists extends React.Component<Props>{
         })
     }
 
-    submitCard = (values: any) => {
-        this.props.submitNewCard(values.cardTitle, this.props.listid, uniqueId('cardid_'));
-    }
-
     render() {
-        console.log('props cards', this.props);
+        console.log('ShowAllLists', this.props.listid);
         return (
             <ListWrapper>
                 <Title>{this.props.title}</Title>
-                <CardContainer onSubmit={this.submitCard} />
+                <CardContainer  
+                    listid={this.props.listid}
+                />
                 {this.renderAllCards}
             </ListWrapper>
         );
@@ -87,11 +81,7 @@ class ShowAllLists extends React.Component<Props>{
 // }
 
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
-    return {
-        submitNewCard: (name: string, listid: string, cardid: string) => { dispatch(submitNewCard(name, listid, cardid)) }
-    }
-}
+
 
 //ActionからsubmitCard()取得
-export default connect(mapDispatchToProps)(ShowAllLists);
+export default connect(null)(ShowAllLists);

@@ -21,6 +21,7 @@ export const setNewCard: ActionCreator<RootActions> = (
 export const submitNewCard = (name: string, listid: string, cardid: string): ThunkAction<void, IAllState, null, RootActions> => (
     dispatch: Dispatch<Action>
 ) => {
+    console.log("submitNewCardActionのlistid", listid)
     dispatch(setNewCard({
         name: name,
         listid: listid,

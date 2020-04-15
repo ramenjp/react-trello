@@ -9,13 +9,13 @@ export interface ISubmitNewListAction extends Action {
 }
 
 
-
 export const setNewList: ActionCreator<RootActions> = (
     payload: string
 ): RootActions => ({
     payload,
     type: SUBMIT_NEW_LIST,
 } as RootActions);
+
 
 export const submitNewList = (title: string): ThunkAction<void, IAllState, null, RootActions> => (
     dispatch: Dispatch<Action>

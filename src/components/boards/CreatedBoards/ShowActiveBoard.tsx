@@ -50,18 +50,22 @@ class ShowActiveBoard extends React.Component<Props>{
     }
 
     getTitle() {
-        console.log("getTitle", this.props.activeBoard)
         return this.props.activeBoard.title;
     }
 
     renderAllLists = () => {
         const { lists } = this.props;
         //listsのkeyだけの配列を作る
+        
         const listId = Object.keys(lists)
-        console.log("RENDER ALL LISTS",listId);
+        console.log("RENDER ALL LISTS listId",listId)
+        console.log("RENDER ALL LISTS lists",lists)
+        console.log("RENDER ALL LISTS listId",lists["id"]);
         
         return listId.map(list => {
             const { listid, title, cards } = lists[list] //listidがundefined
+            console.log("map後の処理 ","listのid"+listid,"listのタイトル"+title,"listのカード"+cards);
+            console.log("listの中身",lists);
             return (
                 <ShowAllLists
                     title={title}

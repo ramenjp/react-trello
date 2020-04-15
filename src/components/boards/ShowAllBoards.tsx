@@ -35,8 +35,11 @@ const Title = styled.h2`
 
 
 const ShowAllBoards: React.FC<IBoard> = (props) => {
+    const listid = props.id;
+    console.log("ShowAllBoards listid" , listid)
     return (
-        <Link to={`/b/${props.id}`}>
+        
+        <Link to={`/b/${listid}`}>
             <BoardWrapper>
                 <Title>{props.title}</Title>
             </BoardWrapper>

@@ -1,38 +1,47 @@
 import { SUBMIT_NEW_LIST, SUBMIT_NEW_CARD } from '../Actions/actions';
 import { ISubmitNewListAction } from './../Actions/submitNewList';
+import { ISubmitNewCardAction } from './../Actions/submitNewCard';
 import uniqueId from 'lodash/uniqueId';
 import { IList } from '../Interface/IStatus';
+
 const initialState = {}
 
-type Actions = ISubmitNewListAction;
+type Actions = ISubmitNewListAction
+             & ISubmitNewCardAction;
+
 
 export type Lists = {
-    [listId: string]: IList
+    [listid: string]: IList
 }
 
-export default (state = initialState, action: Actions): Lists => {
-    const listId = uniqueId("list_");
+export default (state:Lists = initialState, action: Actions): Lists => {
+    const listid = uniqueId("list_");
     switch (action.type) {
         case SUBMIT_NEW_LIST:
             return {
                 ...state,
-                [listId]: {
+                [listid]: {
                     title: action.payload,
-                    listid: listId,
+                    listid: listid,
                     cards: []
                 }
             };
 
         case SUBMIT_NEW_CARD: {
-            //const{ name,listid,cardid } = action.payload;
-            console.log("SUBMIT_NEW_CARD", action.payload);
-            // const name = action.payload;
-            // const listid = action.payload;
-            // const cardid = action.payload;
+            console.log("SUBMIT_NEW_CARD action.payload",action.payload);
+            console.log("SUBMIT_NEW_CARD state",state);
+            //const { name,listid,cardid } = action.payload;
+
+            const name:string = action.payload.name;
+            const listid:string = action.payload.listid;
+            const cardid:string = action.payload.cardid;
 
             //リストを追加するリストを取得
-            // const nowList = state[listid];
-            //state[listid].cards.push({ name: name, listid, cardid })
+             
+            const currentList:IList = state[listid];
+            currentList.cards.push({ name, listid, cardid })
+
+            console.log(state);
             return {
                 ...state,
             }

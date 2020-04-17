@@ -5,13 +5,14 @@ import CardContainer from '../card/CardContainer';
 import { ThunkDispatch } from 'redux-thunk';
 import { IAllState, RootActions } from '../../../../Interface/IAllState';
 // import { submitNewCard } from '../../../../Actions/submitNewCard';
-import { IList } from '../../../../Interface/IStatus';
+//import { IList } from '../../../../Interface/IStatus';
 //import uniqueId from 'lodash/uniqueId';
 //import Store from '../../../../Store';
 import Card from '../card/Card';
 import { submitNewCard } from '../../../../Actions/submitNewCard';
 import uniqueId from 'lodash/uniqueId';
-
+//import { Lists } from '../../../../Reducer/ListReducer';
+import { IList } from '../../../../Interface/IStatus';
 
 const ListWrapper = styled.div`
     width: 245px;
@@ -49,14 +50,25 @@ const Title = styled.h2`
 // }
 
 interface Props extends IList{
-    submitNewCard(name: string, listid: string, cardid: string):void;
+    title: string;
+    listid: string;
+    submitNewCard(name: string, listid: string, cardid: string): void;
 }
 
-class ShowAllLists extends React.Component<Props>{
+// interface PropsByMapState {
+//     lists: Lists;
+//     submitNewCard(name: string, listid: string, cardid: string): void;
+// }
 
-    renderAllCards = () =>{
-        const{ cards } = this.props;
-        console.log("renderAllCardsの中身",cards)
+class ShowAllLists extends React.Component<Props,Props>{
+
+    renderAllCards = () => {
+        
+        // const { lists, listid } = this.props;
+        // const cards = lists[listid].cards;
+
+        const { cards } = this.props;
+        console.log("renderAllCardsの中身", cards)
         return cards.map(card => {
             return (
                 <Card
@@ -67,34 +79,31 @@ class ShowAllLists extends React.Component<Props>{
     }
 
     submitCard = (values: any) => {
-        const{ listid } = this.props;
+        const { listid } = this.props;
         //const cardName = `cardName_${listid}`
-        console.log("values",values)
-        console.log("values.cardTitle",values["card"])
         this.props.submitNewCard(values["card"], listid, uniqueId('cardid_'));
     }
 
     render() {
-        console.log('ShowAllListsのpropsのlist', this.props.listid);
+        console.log('ShowAllListsのprops', this.props);
         return (
             <ListWrapper>
                 <Title>{this.props.title}</Title>
-                <CardContainer  
+                <CardContainer
                     onSubmit={this.submitCard}
                     listid={this.props.listid}
                 />
-                {this.renderAllCards}
+                {this.renderAllCards()}
             </ListWrapper>
         );
     }
 }
 
-// const mapStateToProps = (state:IAllState) => {
-//     return{
-//     cards:state.list.cards
+// const mapStateToProps = (state: IAllState): Lists => {
+//     return {
+//         lists: state.createList
 //     }
 // }
-
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
     return {
@@ -105,4 +114,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>
 
 
 //ActionからsubmitCard()取得
-export default connect(null,mapDispatchToProps)(ShowAllLists);
+export default connect(null, mapDispatchToProps)(ShowAllLists);

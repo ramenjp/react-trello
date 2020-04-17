@@ -29,7 +29,7 @@ interface PropsByDispatch {
     selectActiveBoard(id: string): void
 }
 
-interface ReturnedList {
+export interface ReturnedList {
     lists: Lists;
     activeBoard: IBoard;
 }
@@ -58,9 +58,6 @@ class ShowActiveBoard extends React.Component<Props>{
         //listsのkeyだけの配列を作る
         
         const listId = Object.keys(lists)
-        console.log("RENDER ALL LISTS listId",listId)
-        console.log("RENDER ALL LISTS lists",lists)
-        console.log("RENDER ALL LISTS listId",lists["id"]);
         
         return listId.map(list => {
             const { listid, title, cards } = lists[list] //listidがundefined
@@ -71,6 +68,7 @@ class ShowActiveBoard extends React.Component<Props>{
                     title={title}
                     listid={listid}
                     key={listid}
+                    
                     cards={cards}
                 />
             );
@@ -83,7 +81,6 @@ class ShowActiveBoard extends React.Component<Props>{
     }
 
     render() {
-        console.log('this is ShowActiveBoard');
         return (
             <div>
                 <SubHeader>
@@ -100,11 +97,12 @@ class ShowActiveBoard extends React.Component<Props>{
 }
 
 const mapStateToProps = (state: IAllState): ReturnedList => {
+    console.log("ListReducer更新！")
     return {
         lists: state.createList,
         activeBoard: state.activeBoard
     }
-}
+}       
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
     return {

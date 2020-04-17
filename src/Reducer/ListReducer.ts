@@ -41,9 +41,9 @@ export default (state:Lists = initialState, action: Actions): Lists => {
             const currentList:IList = state[listid];
             currentList.cards.push({ name, listid, cardid })
 
-            console.log(state);
             return {
                 ...state,
+                [listid]:currentList
             }
         }
 

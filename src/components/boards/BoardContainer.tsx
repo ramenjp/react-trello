@@ -17,11 +17,11 @@ interface ReturnedBoard {
 
 interface Props extends ReturnedBoard { }
 
-interface State {
-    isOpen: boolean;
-};
+// interface State {
+//     isOpen: boolean;
+// };
 
-class BoardContainer extends React.Component<Props, State> {
+class BoardContainer extends React.Component<Props> {
 
     renderAllBoards = () => {
         const { boards } = this.props;

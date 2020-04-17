@@ -48,6 +48,13 @@ class CardContainer extends React.Component<Props & PropsByDispatch & InjectedFo
     }
 }
 
+
+
+// const afterSubmit = (result, dispatch) => {
+//     dispatch(reset('card'));
+// }
+
+
 //function validate(values: any,props:Props) {
 function validate(values: any) {
     console.log("Card Validate");
@@ -68,6 +75,7 @@ function validate(values: any) {
 
 export default reduxForm<{}, Props>({
     validate,
-    form: 'card'
+    form: 'card',
+    //onSubmitSuccess:afterSubmit
 })(connect(null)(CardContainer));
 //(connect(null,mapDispatchToProps)(CardContainer));

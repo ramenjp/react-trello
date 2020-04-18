@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 import BoardTitleInput from '../../CreatingBoard/BoardTitleInput';
 // import { ThunkDispatch } from 'redux-thunk';
 // import { IAllState, RootActions } from '../../../../Interface/IAllState';
@@ -16,21 +16,9 @@ interface Props {
 }
 
 class CardContainer extends React.Component<Props & PropsByDispatch & InjectedFormProps<{}, Props>>{
-
-    // submitCard = (values: any) => {
-    //     const{ listid } = this.props;
-    //     const cardName = `cardName_${listid}`
-    //     console.log("values",values)
-    //     console.log("values.cardTitle",values[cardName])
-    //     this.props.submitNewCard(values[cardName], listid, uniqueId('cardid_'));
-    // }
-    
     render() {
-        console.log("CardContainer props,listid",this.props.listid)
         const {handleSubmit,listid } = this.props;
-        console.log("handleSubmitのなかみ",handleSubmit)
         console.log(listid);
-
         return (
             <div>
                 {/* <form onSubmit={handleSubmit(this.submitCard)}> */}
@@ -67,15 +55,9 @@ function validate(values: any) {
     return errors;
 }
 
-// const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
-//     return {
-//         submitNewCard: (name: string, listid: string, cardid: string) => { dispatch(submitNewCard(name, listid, cardid)) }
-//     }
-// }
 
 export default reduxForm<{}, Props>({
     validate,
     form: 'card',
     //onSubmitSuccess:afterSubmit
-})(connect(null)(CardContainer));
-//(connect(null,mapDispatchToProps)(CardContainer));
+})(CardContainer);

@@ -12,7 +12,7 @@ import Card from '../card/Card';
 import { submitNewCard } from '../../../../Actions/submitNewCard';
 import uniqueId from 'lodash/uniqueId';
 //import { Lists } from '../../../../Reducer/ListReducer';
-import { IList } from '../../../../Interface/IStatus';
+import { IList, ICard } from '../../../../Interface/IStatus';
 
 const ListWrapper = styled.div`
     width: 245px;
@@ -49,9 +49,10 @@ const Title = styled.h2`
 //     submitNewCard(name: string, listid: string, cardid: string): void
 // }
 
-interface Props extends IList{
+interface Props extends IList {
     title: string;
     listid: string;
+    cards: ICard[];
     submitNewCard(name: string, listid: string, cardid: string): void;
 }
 
@@ -60,22 +61,22 @@ interface Props extends IList{
 //     submitNewCard(name: string, listid: string, cardid: string): void;
 // }
 
-class ShowAllLists extends React.Component<Props,Props>{
+class ShowAllLists extends React.Component<Props>{
 
     renderAllCards = () => {
-        
         // const { lists, listid } = this.props;
         // const cards = lists[listid].cards;
-
         const { cards } = this.props;
-        console.log("renderAllCardsの中身", cards)
-        return cards.map(card => {
+        console.log("renderAllCardsの中身", cards);
+
+        return cards.map((acard:ICard) => {
+            console.log("map後のカードの名前", acard.name);
             return (
                 <Card
-                    cardName={card.name}
+                    cardName={acard.name}
                 />
-            )
-        })
+            );
+        });
     }
 
     submitCard = (values: any) => {
@@ -93,7 +94,7 @@ class ShowAllLists extends React.Component<Props,Props>{
                     onSubmit={this.submitCard}
                     listid={this.props.listid}
                 />
-                {this.renderAllCards()}
+                <div>{this.renderAllCards()}</div>
             </ListWrapper>
         );
     }
@@ -110,8 +111,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>
         submitNewCard: (name: string, listid: string, cardid: string) => { dispatch(submitNewCard(name, listid, cardid)) }
     }
 }
-
-
 
 //ActionからsubmitCard()取得
 export default connect(null, mapDispatchToProps)(ShowAllLists);

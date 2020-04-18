@@ -55,6 +55,7 @@ class ListEdittingBoard extends React.Component<InjectedFormProps<{}, Props>>{
 }
 
 function validate(values: any) {
+    console.log("ListのValidate");
     let errors: any = {};
     if (!values.listTitle || values.listTitle === "") {
         errors.listTitle = "タイトルを入力してください";

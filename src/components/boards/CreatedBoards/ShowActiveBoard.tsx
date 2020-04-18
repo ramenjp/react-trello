@@ -7,7 +7,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { IAllState, RootActions } from '../../../Interface/IAllState';
 import ShowAllLists from './list/ShowAllLists';
 import { selectActiveBoard } from '../../../Actions/selectActiveBoard';
-import { IBoard } from '../../../Interface/IStatus';
+import { IBoard, ICard } from '../../../Interface/IStatus';
 import { RouteComponentProps } from 'react-router-dom'
 import { Lists } from '../../../Reducer/ListReducer';
 
@@ -57,22 +57,20 @@ class ShowActiveBoard extends React.Component<Props>{
         const { lists } = this.props;
         //listsのkeyだけの配列を作る
         
-        const listId = Object.keys(lists)
+        const listIds = Object.keys(lists)
         
-        return listId.map(list => {
-            const { listid, title, cards } = lists[list] //listidがundefined
-            console.log("map後の処理 ","listのid"+listid,"listのタイトル"+title,"listのカード"+cards);
-            console.log("listの中身",lists);
-            return (
+        return listIds.map((listId: string) => {
+            console.log(lists[listId]);
+            const { listid, title, cards }: { listid: string, title: string, cards: ICard[]} = lists[listId]; //listidがundefined
+            return (　
                 <ShowAllLists
                     title={title}
                     listid={listid}
                     key={listid}
-                    
                     cards={cards}
                 />
             );
-        })
+        });
     }
 
     submitList = (values: any) => {
@@ -83,9 +81,7 @@ class ShowActiveBoard extends React.Component<Props>{
     render() {
         return (
             <div>
-                <SubHeader>
-                    {this.getTitle()}
-                </SubHeader>
+                <SubHeader>{this.getTitle()}</SubHeader>
 
                 <IndexWrapper>
                     {this.renderAllLists()}

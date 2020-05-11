@@ -18,7 +18,6 @@ export default (state = initialState, action: Action): IBoard => {
                 title:action.payload.title,
                 id:action.payload.id
             };
-        
         default:
             return state;
     }

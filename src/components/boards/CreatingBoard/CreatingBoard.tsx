@@ -48,7 +48,8 @@ class CreatingBoard extends React.Component<ICreateNewBoardHundler>{
 
 const mapDispathToProps = (dispatch: Dispatch) => {
     return {
-        createNewBoard: () => { dispatch(createNewBoard()) }
+        createNewBoard: () => {
+            dispatch(createNewBoard()) }
     }
 }
 

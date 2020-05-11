@@ -5,6 +5,7 @@ import { ISubmitNewBoardAction,IStoreNewBoardAction } from '../Actions/submitNew
 import { ISubmitNewListAction} from './../Actions/submitNewList';
 import { ISelectActiveBoard } from '../Actions/selectActiveBoard';
 import { ISubmitNewCardAction } from '../Actions/submitNewCard';
+import { IDropAction } from '../Actions/dropAction';
 
 //storeに登録されてる値をとってきてすべての型を取得
 export type IAllState = ReturnType<typeof Store.getState>;
@@ -15,4 +16,5 @@ export type RootActions = ICreateNewBoardAction
                         & IStoreNewBoardAction
                         & ISubmitNewListAction
                         & ISelectActiveBoard
-                        & ISubmitNewCardAction;
+                        & ISubmitNewCardAction
+                        & IDropAction;

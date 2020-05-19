@@ -18,19 +18,16 @@ interface Props {
 class CardContainer extends React.Component<Props & PropsByDispatch & InjectedFormProps<{}, Props>>{
     render() {
         const {handleSubmit,listid } = this.props;
-        console.log(listid);
         return (
             <div>
-                {/* <form onSubmit={handleSubmit(this.submitCard)}> */}
                 <form onSubmit={handleSubmit}>
-                    <label>
                     <Field
                         name={`card_${listid}`}
                         component={BoardTitleInput}
                         type="text"
                     />
-                    </label>
                 </form>
+                <p></p>
             </div>
         );
     }
@@ -45,7 +42,6 @@ class CardContainer extends React.Component<Props & PropsByDispatch & InjectedFo
 
 //function validate(values: any,props:Props) {
 function validate(values: any) {
-    console.log("Card Validate");
     const errors: any = {};
     // const { listid } = props;
     // const cardName = `cardName_${listid}`
@@ -59,5 +55,4 @@ function validate(values: any) {
 export default reduxForm<{}, Props>({
     validate,
     form: 'card',
-    //onSubmitSuccess:afterSubmit
 })(CardContainer);

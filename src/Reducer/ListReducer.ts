@@ -74,6 +74,7 @@ export default (state: Lists = initialState, action: Actions): Lists => {
 
             return {
                 ...state,
+                [newListid]:droppedList
             }
         };
 

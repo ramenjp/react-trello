@@ -48,9 +48,9 @@ const dropSource: DropTargetSpec<{}> = {
         //dragしているアイテムが取り出される
         const card = monitor.getItem();
         //drop先の情報
-        console.log("dropSourceのpropsの結果", props);
+        console.log("drop先の情報", props);
         //drag元の情報
-        console.log("dropSourceのmonitor.getItem()の結果", card);
+        console.log("drag元の情報", card);
         //ドラッグしてるカードのタイトル等をdropActionに渡す
 
         props.dropAction(card.cardName, card.listid, card.cardid, props.listid);
@@ -90,7 +90,7 @@ class ShowAllLists extends React.Component<any>{
     //values=入力値
     submitCard = (values: { [key: string]: string[] }) => {
         const { listid } = this.props;
-        this.props.submitNewCard(values[`card_${listid}`], listid, uniqueId('cardid_'));
+        this.props.submitNewCard(values[`card_${listid}`], listid, uniqueId('cardid_')+"_"+listid);
     }
 
     render() {

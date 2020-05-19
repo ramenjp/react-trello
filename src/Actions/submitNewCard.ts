@@ -4,11 +4,13 @@ import { RootActions, IAllState } from '../Interface/IAllState';
 import { ThunkAction } from 'redux-thunk';
 import { ICard } from '../Interface/IStatus';
 
+//型
 export interface ISubmitNewCardAction extends Action {
     type: string;
     payload: ICard
 }
 
+//ActionCreator
 export const setNewCard: ActionCreator<RootActions> = (
     payload: ICard
 ): RootActions =>
@@ -17,7 +19,7 @@ export const setNewCard: ActionCreator<RootActions> = (
         type: SUBMIT_NEW_CARD,
     } as RootActions);
 
-
+//Action
 export const submitNewCard = (name: string, listid: string, cardid: string): ThunkAction<void, IAllState, null, RootActions> => (
     dispatch: Dispatch<Action>
 ) => {

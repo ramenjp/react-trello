@@ -1,9 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { DragSource } from "react-dnd"
-import * as reactDnd from 'react-dnd';
-// import { 
-//     ConnectDragSource,
+import * as reactDnD from 'react-dnd';
+// import { ConnectDragSource,
 //     // DragSourceSpec,
 //     // DragSourceCollector,
 //     // DragSourceConnector,
@@ -37,23 +36,20 @@ const CardName = styled.div`
 // }
 
 //dragアイテムの持つデータを示す
-const dragSource = {
-    beginDrag(props:any) {
-        console.log("beginDrag.props",props);
+const dragSource: reactDnD.DragSourceSpec<{}, {}> = {
+    beginDrag(props: any) {
+        console.log("beginDrag.props", props);
         const { cardName, cardid, listid }: { cardName: string, cardid: string, listid: string } = props;
         return { cardName, cardid, listid }
     }
-    // beginDrag({ cardName, cardid, listid }: { cardName:string,cardid:string,listid:string }) {
-    //     return [cardName,cardid,listid];
-    // }
 }
 
 //react-dndのstateをcomponentのpropsに渡す役割
-const collect: reactDnd.DragSourceCollector<{}, {}> = (connect, monitor) => {
+const collect: reactDnD.DragSourceCollector<{}, {}> = (connect) => {
     return {
         connectDragSource: connect.dragSource(),
         connectDragPreview: connect.dragPreview(),
-        isDragging: monitor.isDragging()
+        //isDragging: monitor.isDragging()
     }
 }
 
@@ -64,15 +60,13 @@ const collect: reactDnd.DragSourceCollector<{}, {}> = (connect, monitor) => {
 //     }
 // }
 
-const itemType = "CARD";
-
+const itemType: string = "CARD";
 
 @DragSource(itemType, dragSource, collect)
 class Card extends React.Component<any>{
 
-    // const propTypes = {
+    // static propTypes = {
     //     connectDragSource: PropTypes.func.isRequired,
-    //     connectDragPreview: PropTypes.func.isRequired,
     //     isDragging: PropTypes.bool.isRequired,
     // }
 
@@ -81,8 +75,7 @@ class Card extends React.Component<any>{
         const { cardName } = this.props;
 
         //ReactDnD props
-        const { connectDragSource, isDragging } = this.props;
-        console.log("isDragging", isDragging);
+        const { connectDragSource } = this.props;
         // console.log("connectDragSource", connectDragSource);
 
         return connectDragSource(

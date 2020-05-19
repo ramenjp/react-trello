@@ -8,10 +8,8 @@ import { IAllState, RootActions } from '../../../../Interface/IAllState';
 import { submitNewCard } from '../../../../Actions/submitNewCard';
 import uniqueId from 'lodash/uniqueId';
 import { ICard } from '../../../../Interface/IStatus';
-//import {  IList } from '../../../../Interface/IStatus';
-import { DropTarget } from 'react-dnd';
 import { dropAction } from '../../../../Actions/dropAction';
-import { DropTargetCollector } from 'react-dnd';
+import { DropTarget, DropTargetCollector, DropTargetSpec } from 'react-dnd';
 
 const ListWrapper = styled.div`
     width: 245px;
@@ -28,7 +26,7 @@ const ListWrapper = styled.div`
     cursor: pointer;
     transition: 200ms ease-in-out;
     font-weight: 900;
-    text-shadow: 0px 0px 3px #white;
+    text-shadow: 0px 0px 3px white;
 
     &:hover {
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -43,31 +41,20 @@ const Title = styled.h2`
     padding: 10px;
 `
 
-// interface PropsByDispatch {
-//     submitNewCard(name: string, listid: string, cardid: string): void
-// }
-
-// interface Props extends IList {
-//     title: string;
-//     listid: string;
-//     cards: ICard[];
-//     submitNewCard(name: string, listid: string, cardid: string): void;
-//     dropAction(cardName: string, cardid: string, listid: string):void;
-// }
-
 //Drop類
 //propsにはドロップ先の情報が入る
-const dropSource = {
+const dropSource: DropTargetSpec<{}> = {
     drop(props: any, monitor: any) {
         //dragしているアイテムが取り出される
         const card = monitor.getItem();
-
         //drop先の情報
-        console.log("dropSourceのprops", props);
+        console.log("dropSourceのpropsの結果", props);
         //drag元の情報
-        console.log("dropSourceのmonitor.getItem()", card);
+        console.log("dropSourceのmonitor.getItem()の結果", card);
         //ドラッグしてるカードのタイトル等をdropActionに渡す
-        dropAction(card.title, card.cardid, card.listid, props.listid);
+
+        props.dropAction(card.cardName, card.listid, card.cardid, props.listid);
+        //dropAction(cardName, cardid, listid, newListid);
     }
 }
 
@@ -78,14 +65,10 @@ const collect: DropTargetCollector<{}, {}> = (connect, monitor) => {
     };
 }
 
-const itemType = "CARD";
-
+const itemType: string = "CARD";
 
 class ShowAllLists extends React.Component<any>{
-
     renderAllCards = () => {
-        // const { lists, listid } = this.props;
-        // const cards = lists[listid].cards;
         const { cards } = this.props;
 
         console.log("renderAllCardsの中身", cards);
@@ -104,18 +87,14 @@ class ShowAllLists extends React.Component<any>{
         });
     }
 
-    submitCard = (values: any) => {
+    //values=入力値
+    submitCard = (values: { [key: string]: string[] }) => {
         const { listid } = this.props;
-        //const cardName = `cardName_${listid}`
-        this.props.submitNewCard(values["card"], listid, uniqueId('cardid_'));
+        this.props.submitNewCard(values[`card_${listid}`], listid, uniqueId('cardid_'));
     }
-
 
     render() {
         const { connectDropTarget } = this.props;
-
-        //const { connectDropTarget } = this.props;
-        console.log('ShowAllListsのprops', this.props);
 
         return connectDropTarget(
             <div>
@@ -132,18 +111,13 @@ class ShowAllLists extends React.Component<any>{
     }
 }
 
-// const mapStateToProps = (state: IAllState): Lists => {
-//     return {
-//         lists: state.createList
-//     }
-// }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
     return {
         submitNewCard: (name: string, listid: string, cardid: string) => { dispatch(submitNewCard(name, listid, cardid)) },
-        dropAction: (cardName: string, cardid: string, listid: string,newListid:string) => { dispatch(dropAction(cardName, listid, cardid,newListid)) }
+        dropAction: (cardName: string, cardid: string, listid: string, newListid: string) => { dispatch(dropAction(cardName, listid, cardid, newListid)) }
     }
 }
 
 //ActionからsubmitCard()取得
-export default DropTarget(itemType, dropSource, collect)(connect(null, mapDispatchToProps)(ShowAllLists));
+export default connect(null, mapDispatchToProps)(DropTarget(itemType, dropSource, collect)(ShowAllLists));

@@ -27,6 +27,7 @@ export const Wrapper = styled.div`
         transform: scale(1.10);
     }
 `
+
 export const Text = styled.h3`
     color:white;
 `

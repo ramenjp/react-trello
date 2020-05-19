@@ -25,7 +25,7 @@ class CardContainer extends React.Component<Props & PropsByDispatch & InjectedFo
                 <form onSubmit={handleSubmit}>
                     <label>
                     <Field
-                        name="card"
+                        name={`card_${listid}`}
                         component={BoardTitleInput}
                         type="text"
                     />

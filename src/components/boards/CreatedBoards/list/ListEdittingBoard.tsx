@@ -32,12 +32,31 @@ const FormWrapper = styled.div`
     justify-content: center;
 `
 
+const SubmitButton = styled.button`
+    width: 114px;
+    height: 43px;
+    margin: 15px 18px 5px;
+    cursor: pointer;
+    transition: all 250 ease-in-out;
+    border: none;
+    border-radius: 5px;
+    font-weight:bold;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+    &:hover {
+        transition: all 250ms ease-in-out;
+        color: #00BAFF;
+        background-color: #dbdbdb;
+    }
+`
+
+
+
 interface Props { }
 
 class ListEdittingBoard extends React.Component<InjectedFormProps<{}, Props>>{
     render() {
         const { handleSubmit } = this.props;
-        console.log('this is ListEdittingBoard');
         return (
             <ListEdittingWrapper>
                 <FormWrapper>
@@ -49,6 +68,7 @@ class ListEdittingBoard extends React.Component<InjectedFormProps<{}, Props>>{
                         />
                     </form>
                 </FormWrapper>
+                <SubmitButton onClick={handleSubmit} type="button">リストを作成</SubmitButton>
             </ListEdittingWrapper>
         );
     }

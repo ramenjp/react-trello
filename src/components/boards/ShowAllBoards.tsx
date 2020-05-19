@@ -18,7 +18,7 @@ const BoardWrapper = styled.div`
     cursor: pointer;
     transition: 200ms ease-in-out;
     font-weight: 900;
-    text-shadow: 0px 0px 3px #white;
+    text-shadow: 0px 0px 3px white;
 
     &:hover {
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -33,16 +33,23 @@ const Title = styled.h2`
     padding: 10px;
 `
 
+const StyledLink = styled.div`
+    a{
+        text-decoration: none;
+    }
+`;
 
 const ShowAllBoards: React.FC<IBoard> = (props) => {
     const listid = props.id;
     console.log("ShowAllBoards listid" , listid)
     return (
+        <StyledLink>
         <Link to={`/b/${listid}`}>
             <BoardWrapper>
                 <Title>{props.title}</Title>
             </BoardWrapper>
         </Link>
+        </StyledLink>
     );
 }
 

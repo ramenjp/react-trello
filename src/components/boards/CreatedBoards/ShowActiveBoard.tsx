@@ -14,12 +14,11 @@ import { Lists } from '../../../Reducer/ListReducer';
 const SubHeader = styled.h4`
     width: 1000px;
     height:auto
-    background-color: #ebecf0;;
+    background-color#ebecf0;
     display:flex;
     color:black;
-    font-weight: 900;
+    font-weight:900;
 `
-
 const IndexWrapper = styled.div`
     display:flex;
 `
@@ -61,7 +60,7 @@ class ShowActiveBoard extends React.Component<Props>{
         
         return listIds.map((listId: string) => {
             console.log(lists[listId]);
-            const { listid, title, cards }: { listid: string, title: string, cards: ICard[]} = lists[listId]; //listidがundefined
+            const { listid, title, cards }: { listid: string, title: string, cards: ICard[]} = lists[listId];
             return (　
                 <ShowAllLists
                     title={title}

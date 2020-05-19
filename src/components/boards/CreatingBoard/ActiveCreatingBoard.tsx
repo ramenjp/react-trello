@@ -38,10 +38,11 @@ const Title = styled.h4`
 `
 
 const BodyWrapper = styled.h4`
-   
     flex-direction: column;
     margin: 10px;
 `
+
+
 interface PropsByDispatch {
     cancelCreateBoard(): void,
     submitNewBoard(title: string): void

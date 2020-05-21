@@ -9,12 +9,12 @@ import BoardTitleInput from '../../CreatingBoard/BoardTitleInput';
 
 
 interface Props {
-    listid:string;
+    listid: string;
 }
 
 class CardContainer extends React.Component<Props & InjectedFormProps<{}, Props>>{
     render() {
-        const {handleSubmit,listid } = this.props;
+        const { handleSubmit, listid } = this.props;
         return (
             <div>
                 <form onSubmit={handleSubmit}>
@@ -31,7 +31,7 @@ class CardContainer extends React.Component<Props & InjectedFormProps<{}, Props>
 }
 
 //function validate(values: any,props:Props) {
-function validate(values:any) {
+function validate(values: any) {
     const errors: any = {};
     if (!values.card || values.card === "") {
         errors.card = "カードタイトルを入力してください";

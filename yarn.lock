@@ -217,20 +217,6 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/react-dnd-html5-backend@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@types/react-dnd-html5-backend/-/react-dnd-html5-backend-3.0.2.tgz#f3cc8307cb9563a2896cb9fb48a09660a0e209c9"
-  integrity sha512-sLKCHGGoXrxbx3QX9Jerg51dRjeUKD+c+HL59ZTkut5GevxJFC8PxsVpcoMchBRd9X+GUyrsaBSXGteWCpMISw==
-  dependencies:
-    react-dnd-html5-backend "*"
-
-"@types/react-dnd@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@types/react-dnd/-/react-dnd-3.0.2.tgz#939e5a8ca5b83f847c3f64dabbe2f49a9fefb192"
-  integrity sha512-Z1BqHYGFtfSPfWs+kgX4b6wQmwwtqq4/pLo4zdO9xcDUB1ZQP8iWTAYNf3EJ2f0WiVQpSLN8UytP+ILzZHDLYw==
-  dependencies:
-    react-dnd "*"
-
 "@types/react-dom@^16.0.7":
   version "16.9.5"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.5.tgz#5de610b04a35d07ffd8f44edad93a71032d9aaa7"
@@ -3983,14 +3969,7 @@ rc@^1.0.1, rc@^1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dnd-html5-backend@*, react-dnd-html5-backend@^10.0.2:
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-10.0.2.tgz#15cb9d2b923f43576a136df854e288cb5969784c"
-  integrity sha512-ny17gUdInZ6PIGXdzfwPhoztRdNVVvjoJMdG80hkDBamJBeUPuNF2Wv4D3uoQJLjXssX1+i9PhBqc7EpogClwQ==
-  dependencies:
-    dnd-core "^10.0.2"
-
-react-dnd@*, react-dnd@^10.0.2:
+react-dnd@^10.0.2:
   version "10.0.2"
   resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-10.0.2.tgz#a6ad8eb3d9f2c573031f7ce05012e5c767a0b1fc"
   integrity sha512-SC2Ymvntynhoqtf5zaFhZscm9xenCoMofilxPdlwUlaelAzmbl9fw82C4ZJ//+lNm3kWAKXjGDZg2/aWjKEAtg==

@@ -20,12 +20,12 @@ export const setNewCard: ActionCreator<RootActions> = (
     } as RootActions);
 
 //Action
-export const submitNewCard = (name: string, listid: string, cardid: string): ThunkAction<void, IAllState, null, RootActions> => (
+export const submitNewCard = (cardName: string, listid: string, cardid: string): ThunkAction<void, IAllState, null, RootActions> => (
     dispatch: Dispatch<Action>
 ) => {
     console.log("submitNewCardActionのlistid", listid)
     dispatch(setNewCard({
-        name: name,
+        cardName: cardName,
         listid: listid,
         cardid:cardid
     }));

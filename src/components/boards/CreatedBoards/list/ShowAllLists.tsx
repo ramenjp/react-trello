@@ -9,7 +9,7 @@ import { submitNewCard } from '../../../../Actions/submitNewCard';
 import uniqueId from 'lodash/uniqueId';
 import { ICard } from '../../../../Interface/IStatus';
 import { dropAction } from '../../../../Actions/dropAction';
-import { DropTarget, DropTargetCollector, DropTargetSpec } from 'react-dnd';
+import { DropTarget, DropTargetCollector, DropTargetSpec,DropTargetMonitor } from 'react-dnd';
 
 const ListWrapper = styled.div`
     width: 245px;
@@ -41,20 +41,24 @@ const Title = styled.h2`
     padding: 10px;
 `
 
+
+// interface Props{
+//     props:IList;
+// }
+
+
 //Drop類
 //propsにはドロップ先の情報が入る
 const dropSource: DropTargetSpec<{}> = {
-    drop(props: any, monitor: any) {
+    drop(props: any, monitor: DropTargetMonitor) {
         //dragしているアイテムが取り出される
-        const card = monitor.getItem();
+        const card:ICard = monitor.getItem();
         //drop先の情報
         console.log("drop先の情報", props);
         //drag元の情報
         console.log("drag元の情報", card);
         //ドラッグしてるカードのタイトル等をdropActionに渡す
-
         props.dropAction(card.cardName, card.listid, card.cardid, props.listid);
-        //dropAction(cardName, cardid, listid, newListid);
     }
 }
 
@@ -67,18 +71,32 @@ const collect: DropTargetCollector<{}, {}> = (connect, monitor) => {
 
 const itemType: string = "CARD";
 
+
+// interface Props{
+//     title:string;
+//     listid:string;
+//     cardid:string;
+//     cards:ICard[];
+//     submitNewCard(cardName:string[],listid:string,cardid:string):void;
+//     dropAction():void;
+//     connectDropTarget:ConnectDropTarget;
+// }
+
+// interface DnD{
+//     DropTarget:DndComponentEnhancer<Props>
+// }
+
 class ShowAllLists extends React.Component<any>{
     renderAllCards = () => {
         const { cards } = this.props;
-
         console.log("renderAllCardsの中身", cards);
 
         return cards.map((acard: ICard) => {
-            console.log("map後のカードの名前", acard.name);
+            console.log("map後のカードの名前", acard.cardName);
             console.log("cardのid等", acard.listid, acard.cardid);
             return (
                 <Card
-                    cardName={acard.name}
+                    cardName={acard.cardName}
                     listid={acard.listid}
                     cardid={acard.cardid}
                     key={acard.cardid}
@@ -91,6 +109,7 @@ class ShowAllLists extends React.Component<any>{
     submitCard = (values: { [key: string]: string[] }) => {
         const { listid } = this.props;
         this.props.submitNewCard(values[`card_${listid}`], listid, uniqueId('cardid_')+"_"+listid);
+        values[`card_${listid}`] = [''];
     }
 
     render() {
@@ -112,7 +131,7 @@ class ShowAllLists extends React.Component<any>{
 }
 
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, null, RootActions>) => {
     return {
         submitNewCard: (name: string, listid: string, cardid: string) => { dispatch(submitNewCard(name, listid, cardid)) },
         dropAction: (cardName: string, cardid: string, listid: string, newListid: string) => { dispatch(dropAction(cardName, listid, cardid, newListid)) }

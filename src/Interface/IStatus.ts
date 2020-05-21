@@ -5,7 +5,7 @@ export interface IList{
 }
 
 export interface ICard {
-    name: string;
+    cardName: string;
     listid:string;
     newListid?:string;
     cardid:string;

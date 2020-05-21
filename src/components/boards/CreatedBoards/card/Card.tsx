@@ -2,15 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { DragSource } from "react-dnd"
 import * as reactDnD from 'react-dnd';
-// import { ConnectDragSource,
-//     // DragSourceSpec,
-//     // DragSourceCollector,
-//     // DragSourceConnector,
-//     // DragSourceMonitor,
-//     // DragElementWrapper,
-// } from 'react-dnd'; 
-//import PropTypes from 'prop-types'
-
+import { ICard } from '../../../../Interface/IStatus';
 
 const CardName = styled.div`
     display:flex;
@@ -23,21 +15,10 @@ const CardName = styled.div`
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 `
 
-// interface Props {
-//     cardName: string;
-//     listid: string;
-//     cardid: string;
-// }
-
-// interface DragDropProps {
-//     connectDragSource: ConnectDragSource
-//     connectDragPreview: any
-//     isDragging: boolean
-// }
 
 //dragアイテムの持つデータを示す
-const dragSource: reactDnD.DragSourceSpec<{}, {}> = {
-    beginDrag(props: any) {
+const dragSource: reactDnD.DragSourceSpec<ICard, {}> = {
+    beginDrag(props: ICard):ICard {
         console.log("beginDrag.props", props);
         const { cardName, cardid, listid }: { cardName: string, cardid: string, listid: string } = props;
         return { cardName, cardid, listid }
@@ -49,16 +30,8 @@ const collect: reactDnD.DragSourceCollector<{}, {}> = (connect) => {
     return {
         connectDragSource: connect.dragSource(),
         connectDragPreview: connect.dragPreview(),
-        //isDragging: monitor.isDragging()
     }
 }
-
-//Drag中のスタイル変更用
-// const getItemStyles = (isDragging: boolean) => {
-//     return {
-//         opacity: isDragging ? "0.4" : "1"
-//     }
-// }
 
 const itemType: string = "CARD";
 

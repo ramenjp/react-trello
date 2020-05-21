@@ -32,13 +32,13 @@ export default (state: Lists = initialState, action: Actions): Lists => {
             //console.log("SUBMIT_NEW_CARD state", state);
             //const { name,listid,cardid } = action.payload;
 
-            const name: string = action.payload.name;
+            const cardName: string = action.payload.cardName;
             const listid: string = action.payload.listid;
             const cardid: string = action.payload.cardid;
 
             //カードを追加するリストを取得
             const currentList: IList = state[listid];
-            const newCard: ICard[] = currentList.cards.concat({ name, listid, cardid })
+            const newCard: ICard[] = currentList.cards.concat({ cardName, listid, cardid })
 
             currentList.cards = newCard;
 
@@ -49,7 +49,7 @@ export default (state: Lists = initialState, action: Actions): Lists => {
         };
         case DROP_ACTION: {
             //dragアイテム
-            const name: string = action.payload.cardName;
+            const cardName: string = action.payload.cardName;
             const listid: string = action.payload.listid;
             const cardid: string = action.payload.cardid;
             //drop先listid
@@ -61,7 +61,7 @@ export default (state: Lists = initialState, action: Actions): Lists => {
             const droppedList: IList = state[newListid];
 
             //ドロップ先のカードにドラッグアイテムを追加
-            const newCard:ICard[] = droppedList.cards.concat({ name, listid:newListid, cardid });
+            const newCard:ICard[] = droppedList.cards.concat({ cardName, listid:newListid, cardid });
             droppedList.cards = newCard;
 
 

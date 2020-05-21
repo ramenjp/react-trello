@@ -13,6 +13,7 @@ const StyledLink = styled.div`
         text-decoration: none;
         color:black;
     };
+    
 `;
 
 class Header extends React.Component {

@@ -72,7 +72,8 @@ class ShowActiveBoard extends React.Component<Props>{
         });
     }
 
-    submitList = (values: any) => {
+    submitList = (values:any) => {
+        console.log("submitList",values);
         this.props.submitNewList(values.listTitle);
         values.listTitle = '';
     }
@@ -99,7 +100,7 @@ const mapStateToProps = (state: IAllState): ReturnedList => {
     }
 }       
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, null, RootActions>) => {
     return {
         submitNewList: (title: string) => { dispatch(submitNewList(title)) },
         selectActiveBoard: (id: string) => { dispatch(selectActiveBoard(id)) }

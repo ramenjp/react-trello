@@ -42,7 +42,6 @@ const BodyWrapper = styled.h4`
     margin: 10px;
 `
 
-
 interface PropsByDispatch {
     cancelCreateBoard(): void,
     submitNewBoard(title: string): void
@@ -54,7 +53,7 @@ class ActiveCreatingBoard extends React.Component<PropsByDispatch> {
         this.submit = this.submit.bind(this);
     }
 
-    submit = (values: any) => {
+    submit = (values:any) => {
         console.log('ActiveCreatingBoard:values.boardTitle', values)
         this.props.submitNewBoard(values.boardTitle);
         values.boardTitle = '';
@@ -77,7 +76,7 @@ class ActiveCreatingBoard extends React.Component<PropsByDispatch> {
     }
 }
 
-const mapDispathToProps = (dispatch: ThunkDispatch<IAllState, any, RootActions>) => {
+const mapDispathToProps = (dispatch: ThunkDispatch<IAllState, null, RootActions>) => {
     return {
         submitNewBoard: (title: string) => { dispatch(submitNewBoard(title)) },
         cancelCreateBoard: () => { dispatch(cancelCreateBoard()) }

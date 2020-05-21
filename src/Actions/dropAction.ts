@@ -16,7 +16,7 @@ export interface IDropAction extends Action {
 }
 
 export const dropActivate: ActionCreator<RootActions> = (
-    payload: any
+    payload: dropCard
 ): RootActions => ({
     payload,
     type: DROP_ACTION,

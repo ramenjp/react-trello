@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 const BoardTitleInput: React.SFC = (field: any) => {
+    console.log("field",field);
     console.log("CardTitleのインプット",field)
     return (
         <label>

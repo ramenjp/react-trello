@@ -73,8 +73,8 @@ class ListEdittingBoard extends React.Component<InjectedFormProps<{}, Props>>{
     }
 }
 
-function validate(values: any) {
-    let errors: any = {};
+function validate(values: {listTitle:string}) {
+    const errors: any = {};
     if (!values.listTitle || values.listTitle === "") {
         errors.listTitle = "タイトルを入力してください";
     }

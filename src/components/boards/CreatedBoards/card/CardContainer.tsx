@@ -7,15 +7,12 @@ import BoardTitleInput from '../../CreatingBoard/BoardTitleInput';
 // import { submitNewCard } from '../../../../Actions/submitNewCard';
 // import uniqueId from 'lodash/uniqueId';
 
-interface PropsByDispatch {
-    //submitNewCard(name: string, listid: string, cardid: string): void
-}
 
 interface Props {
     listid:string;
 }
 
-class CardContainer extends React.Component<Props & PropsByDispatch & InjectedFormProps<{}, Props>>{
+class CardContainer extends React.Component<Props & InjectedFormProps<{}, Props>>{
     render() {
         const {handleSubmit,listid } = this.props;
         return (
@@ -33,18 +30,9 @@ class CardContainer extends React.Component<Props & PropsByDispatch & InjectedFo
     }
 }
 
-
-
-// const afterSubmit = (result, dispatch) => {
-//     dispatch(reset('card'));
-// }
-
-
 //function validate(values: any,props:Props) {
-function validate(values: any) {
+function validate(values:any) {
     const errors: any = {};
-    // const { listid } = props;
-    // const cardName = `cardName_${listid}`
     if (!values.card || values.card === "") {
         errors.card = "カードタイトルを入力してください";
     }
@@ -54,5 +42,5 @@ function validate(values: any) {
 
 export default reduxForm<{}, Props>({
     validate,
-    form: 'card',
+    form: 'cardName',
 })(CardContainer);

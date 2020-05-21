@@ -53,10 +53,11 @@ const FormWrapper = styled.div`
 
 interface Props {
     cancelAction(): void;
+    handleSubmit?():void;
 }
 
 //<>内は引き数（Props）の型
-const BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: any) => {
+const BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: Props) => {
     console.log('BoardTitleForm,props', props);
     const { handleSubmit, cancelAction } = props;
     return (
@@ -78,8 +79,11 @@ const BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: 
     );
 }
 
-function validate(values: any) {
-    let errors: any = {};
+function validate(values: {boardTitle:string}) {
+    console.log("boardTitleForm.values",values);
+    const errors:any = {};
+    console.log("error",errors);
+    console.log("errorboardTitle",errors.boardTitle);
     if (!values.boardTitle || values.boardTitle === "") {
         errors.boardTitle = "ボードタイトルを入力してください";
     }

@@ -9,7 +9,8 @@ import { submitNewCard } from '../../../../Actions/submitNewCard';
 import uniqueId from 'lodash/uniqueId';
 import { ICard } from '../../../../Interface/IStatus';
 import { dropAction } from '../../../../Actions/dropAction';
-import { DropTarget, DropTargetCollector, DropTargetSpec,DropTargetMonitor } from 'react-dnd';
+import * as ReactDnd from 'react-dnd';
+import { DropTargetCollector, DropTargetSpec } from 'react-dnd';
 
 const ListWrapper = styled.div`
     width: 245px;
@@ -26,7 +27,6 @@ const ListWrapper = styled.div`
     cursor: pointer;
     transition: 200ms ease-in-out;
     font-weight: 900;
-    text-shadow: 0px 0px 3px white;
 
     &:hover {
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -41,18 +41,32 @@ const Title = styled.h2`
     padding: 10px;
 `
 
+type DropTargetProps = {
+    listid: string;
+    dropAction: ReturnType<typeof mapDispatchToProps>['dropAction'];
+}
 
-// interface Props{
-//     props:IList;
-// }
+type CollectedProps = {
+    connectDropTarget: ReactDnd.DragElementWrapper<{}>
+    canDrop: boolean
+}
+
+// type Props = {
+//     title: string;
+//     listid: string;
+//     cardid: string;
+//     cards: ICard[];
+//     submitNewCard(cardName: string[], listid: string, cardid: string): void;
+//     dropAction(cardName: string, cardid: string, listid: string, newListid: string): void;
+// } & CollectedProps
 
 
 //Drop類
 //propsにはドロップ先の情報が入る
-const dropSource: DropTargetSpec<{}> = {
-    drop(props: any, monitor: DropTargetMonitor) {
+const dropSource: DropTargetSpec<DropTargetProps> = {
+    drop(props, monitor) {
         //dragしているアイテムが取り出される
-        const card:ICard = monitor.getItem();
+        const card: ICard = monitor.getItem();
         //drop先の情報
         console.log("drop先の情報", props);
         //drag元の情報
@@ -62,7 +76,7 @@ const dropSource: DropTargetSpec<{}> = {
     }
 }
 
-const collect: DropTargetCollector<{}, {}> = (connect, monitor) => {
+const collect: DropTargetCollector<CollectedProps, DropTargetProps> = (connect, monitor): CollectedProps => {
     return {
         connectDropTarget: connect.dropTarget(),
         canDrop: monitor.canDrop(),
@@ -72,15 +86,6 @@ const collect: DropTargetCollector<{}, {}> = (connect, monitor) => {
 const itemType: string = "CARD";
 
 
-// interface Props{
-//     title:string;
-//     listid:string;
-//     cardid:string;
-//     cards:ICard[];
-//     submitNewCard(cardName:string[],listid:string,cardid:string):void;
-//     dropAction():void;
-//     connectDropTarget:ConnectDropTarget;
-// }
 
 // interface DnD{
 //     DropTarget:DndComponentEnhancer<Props>
@@ -108,7 +113,8 @@ class ShowAllLists extends React.Component<any>{
     //values=入力値
     submitCard = (values: { [key: string]: string[] }) => {
         const { listid } = this.props;
-        this.props.submitNewCard(values[`card_${listid}`], listid, uniqueId('cardid_')+"_"+listid);
+        const targetList = values[`card_${listid}`]
+        this.props.submitNewCard(targetList, listid, uniqueId('cardid_') + "_" + listid);
         values[`card_${listid}`] = [''];
     }
 
@@ -139,4 +145,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IAllState, null, RootActions
 }
 
 //ActionからsubmitCard()取得
-export default connect(null, mapDispatchToProps)(DropTarget(itemType, dropSource, collect)(ShowAllLists));
+export default connect(null, mapDispatchToProps)(ReactDnd.DropTarget<DropTargetProps, CollectedProps>(itemType, dropSource, collect)(ShowAllLists));

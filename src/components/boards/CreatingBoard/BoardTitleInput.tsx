@@ -1,13 +1,13 @@
 import * as React from 'react';
+import * as ReduxForm from 'redux-form'
 
-const BoardTitleInput: React.SFC = (field: any) => {
+const BoardTitleInput = (field: ReduxForm.WrappedFieldProps) => {
     console.log("field",field);
     console.log("CardTitleのインプット",field)
     return (
         <label>
             <input
                 {...field.input}
-                placeholder={field.placeholder}
                 type="text"
                 className="input"
             />

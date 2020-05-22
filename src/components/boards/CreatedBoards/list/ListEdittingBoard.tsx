@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import BoardTitleInput from '../../CreatingBoard/BoardTitleInput';
-import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import { Field, reduxForm, InjectedFormProps,FormErrors } from 'redux-form';
 
 const ListEdittingWrapper = styled.div`
     width: 245px;
@@ -73,8 +73,8 @@ class ListEdittingBoard extends React.Component<InjectedFormProps<{}, Props>>{
     }
 }
 
-function validate(values: {listTitle:string}) {
-    const errors: any = {};
+function validate(values: {listTitle:string}):FormErrors<{ listTitle:string},string> {
+    const errors: FormErrors<{listTitle:string},string> = {};
     if (!values.listTitle || values.listTitle === "") {
         errors.listTitle = "タイトルを入力してください";
     }

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import { Field, reduxForm, InjectedFormProps,FormErrors} from 'redux-form';
 import BoardTitleInput from './BoardTitleInput';
 import { connect } from 'react-redux';
+
 
 const ButtonWrapper = styled.div`
     margin: 20px 0 5px 0;
@@ -57,7 +58,7 @@ interface Props {
 }
 
 //<>内は引き数（Props）の型
-const BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: Props) => {
+const BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props, string>> = (props: Props) => {
     console.log('BoardTitleForm,props', props);
     const { handleSubmit, cancelAction } = props;
     return (
@@ -79,9 +80,9 @@ const BoardTitleForm: React.SFC<Props & InjectedFormProps<{}, Props>> = (props: 
     );
 }
 
-function validate(values: {boardTitle:string}) {
-    console.log("boardTitleForm.values",values);
-    const errors:any = {};
+function validate(values: {boardTitle:string}):FormErrors<{ boardTitle:string},string> {
+    console.log("boardTitleForm.values", values);
+    const errors:FormErrors<{boardTitle:string},string> = {};
     console.log("error",errors);
     console.log("errorboardTitle",errors.boardTitle);
     if (!values.boardTitle || values.boardTitle === "") {
@@ -90,7 +91,7 @@ function validate(values: {boardTitle:string}) {
     return errors;
 }
 
-const form = reduxForm<{}, Props>({
+const form = reduxForm<{}, Props,string>({
     validate,
     form: 'boardTitle',
 })(BoardTitleForm)

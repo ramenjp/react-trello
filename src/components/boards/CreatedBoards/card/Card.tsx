@@ -38,18 +38,11 @@ const itemType: string = "CARD";
 @DragSource(itemType, dragSource, collect)
 class Card extends React.Component<any>{
 
-    // static propTypes = {
-    //     connectDragSource: PropTypes.func.isRequired,
-    //     isDragging: PropTypes.bool.isRequired,
-    // }
-
     render() {
         //通常のprops
         const { cardName } = this.props;
-
         //ReactDnD props
         const { connectDragSource } = this.props;
-        // console.log("connectDragSource", connectDragSource);
 
         return connectDragSource(
             <div>

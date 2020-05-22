@@ -28,10 +28,6 @@ export default (state: Lists = initialState, action: Actions): Lists => {
                 }
             };
         case SUBMIT_NEW_CARD: {
-            //console.log("SUBMIT_NEW_CARD action.payload", action.payload);
-            //console.log("SUBMIT_NEW_CARD state", state);
-            //const { name,listid,cardid } = action.payload;
-
             const cardName: string = action.payload.cardName;
             const listid: string = action.payload.listid;
             const cardid: string = action.payload.cardid;

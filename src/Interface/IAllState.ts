@@ -10,11 +10,11 @@ import { IDropAction } from '../Actions/dropAction';
 //storeに登録されてる値をとってきてすべての型を取得
 export type IAllState = ReturnType<typeof Store.getState>;
 
-export type RootActions = ICreateNewBoardAction 
-                        & ICancelCreateBoardAction
-                        & ISubmitNewBoardAction
-                        & IStoreNewBoardAction
-                        & ISubmitNewListAction
-                        & ISelectActiveBoard
-                        & ISubmitNewCardAction
-                        & IDropAction;
+export type RootActions = ICreateNewBoardAction & 
+                          ICancelCreateBoardAction & 
+                          ISubmitNewBoardAction & 
+                          IStoreNewBoardAction & 
+                          ISubmitNewListAction & 
+                          ISelectActiveBoard & 
+                          ISubmitNewCardAction & 
+                          IDropAction;

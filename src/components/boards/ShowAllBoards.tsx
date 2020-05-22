@@ -18,7 +18,6 @@ const BoardWrapper = styled.div`
     cursor: pointer;
     transition: 200ms ease-in-out;
     font-weight: 900;
-    text-shadow: 0px 0px 3px white;
 
     &:hover {
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);

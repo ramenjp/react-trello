@@ -61,7 +61,7 @@ class ShowActiveBoard extends React.Component<Props>{
         return listIds.map((listId: string) => {
             console.log(lists[listId]);
             const { listid, title, cards }: { listid: string, title: string, cards: ICard[]} = lists[listId];
-            return (　
+            return (
                 <ShowAllLists
                     title={title}
                     listid={listid}

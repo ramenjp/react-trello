@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import { Field, reduxForm, InjectedFormProps,FormErrors } from 'redux-form';
 //import { connect } from 'react-redux';
 import BoardTitleInput from '../../CreatingBoard/BoardTitleInput';
 // import { ThunkDispatch } from 'redux-thunk';
@@ -9,12 +9,12 @@ import BoardTitleInput from '../../CreatingBoard/BoardTitleInput';
 
 
 interface Props {
-    listid:string;
+    listid: string;
 }
 
 class CardContainer extends React.Component<Props & InjectedFormProps<{}, Props>>{
     render() {
-        const {handleSubmit,listid } = this.props;
+        const { handleSubmit, listid } = this.props;
         return (
             <div>
                 <form onSubmit={handleSubmit}>
@@ -30,11 +30,10 @@ class CardContainer extends React.Component<Props & InjectedFormProps<{}, Props>
     }
 }
 
-//function validate(values: any,props:Props) {
-function validate(values:any) {
-    const errors: any = {};
-    if (!values.card || values.card === "") {
-        errors.card = "カードタイトルを入力してください";
+function validate(values: {cardName:string}):FormErrors<{ cardName:string},string>{
+    const errors: FormErrors<{cardName:string},string> = {};
+    if (!values.cardName || values.cardName === "") {
+        errors.cardName = "カードタイトルを入力してください";
     }
     return errors;
 }

@@ -1,13 +1,25 @@
-# What is this
-Sample starter kit of react in TypeScript with webpack.
+# Trelloクローン
+ToDo管理アプリTrelloのクローンを作成しました
 
-## How to start
-You can try it with the following command.
+# アーキテクチャ
+**Component**
+DOM
+Reduxとの接続
+**Action**
+**Reducer**
 
-```shell
-npm run start
-```
 
-## Handbook in Japanese
-Qiita
-https://qiita.com/IgnorantCoder/items/d26083d9f886ca66d4ae
+# 機能一覧
+- Board作成
+- List作成
+- Card作成
+- Drag and Drop
+
+# 使用技術
+- TypeScript
+- React
+- Redux
+- React-dnd
+- Redux-form
+- React-Router
+
